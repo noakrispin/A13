@@ -7,6 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors:{
+        "Purple": "#f5f2ff",
+        "primaryBG": "#0a090b"
+      },
+      fontFamily:{
+        'primary': ['Inter', 'sans-serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -16,3 +23,4 @@ module.exports = {
   },
   plugins: [],
 }
+

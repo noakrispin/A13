@@ -1,5 +1,9 @@
+import { products } from "@/Utils/products";
 import HomeBanner from "./components/HomeBanner";
-import Container from "./components/container";
+import Container from "./components/Container";
+import { truncateText } from "@/Utils/truncateText";
+import ProductsCard from "./components/products/ProductsCard";
+
 
 export default function Home() {
   return (
@@ -8,8 +12,16 @@ export default function Home() {
         <div>
           <HomeBanner/>
         </div>
+        <div className="grid grid-cols-2
+        sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5
+        2xl:grid-cols-6 gap-8">
+          {products.map((products: any) => {
+          return <ProductsCard data={products}/>;
+        })}
+        </div>
       </Container>
     </div>
-  )
+  );
+
 }
 
