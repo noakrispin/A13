@@ -1,14 +1,17 @@
 'use client';
 
 import Button from "@/app/components/Button";
+import ProductsImg from "@/app/components/products/ProductsImg";
 import { useState } from "react";
+import { IoMdEasel } from "react-icons/io";
+import { LiaShippingFastSolid } from "react-icons/lia";
 
 interface ProductDetailsProps{
     product: any
 }
 
 const Horizontal =() => {
-  return <hr className="w-[50%] my-2 opacity-25"/>
+  return <hr className="w-[80%] my-2  bg-violet-500"/>
 };
 
 export type CartProductType ={
@@ -29,7 +32,7 @@ export type SelectedImgType ={
 }
 const ProductDetails: React.FC<ProductDetailsProps>
 = ({product}) => {
-  const [CartProduct,setCartProduct]= 
+  const [cartProduct,setCartProduct]= 
   useState<CartProductType>({
     id:product.id,
     name: product.name, 
@@ -41,23 +44,25 @@ const ProductDetails: React.FC<ProductDetailsProps>
     price: product.price
   })
   return (
-    <div className="grid grid-cols-1 
-    md:grid-cols-2 gap-12 text-violet-200">
-        <div>Images</div>
-        <div>
-            <h2 className="text-3xl font-medium ">{product.name}</h2>
-            <Horizontal/>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-0 text-black">
+      <div className="">
+        <ProductsImg cartProduct={cartProduct} product={product} />
+      </div>
+        <div className="w-2/3 h-2/3 p-4 bg-white shadow-md rounded-lg">
+            <h2 className="text-3xl font-medium mb-6">{product.name}</h2>
+
+            <div className="text-justify mb-4">{product.Artist_Name}</div>
             <div className="text-justify ">{product.description}</div>
-            <div className="text-justify ">{product.Artist_Name}</div>
             <div className="text-justify ">{product.Size}</div>
             <Horizontal/>
             <div> 
-              <span className="font-semibold ">CATEGORY:</span>{product.category}
+              <span className="font-semibold mb-2 ">Category: </span>{product.category}
             </div>
-            <div>{product.inStock? 'In stock' : 'Out of stock'} </div>
+            <div className="text-justify flex items-center gap-2 md:underline"><IoMdEasel />{product.unique}</div>
+            <div className="text-justify flex items-center gap-2 md:underline"><LiaShippingFastSolid />{product.Shipping}</div>
             <Horizontal/>
-            <div>
-              <Button
+            <div className="max-w-[300px]">
+              <Button 
               label="Add To Cart"
               onClick={()=>{}}
               />

@@ -31,7 +31,7 @@ const Button: React.FC <ButtonPtops> = ({
     rounded-md
     hover:opacity-80
     transition
-    w-1/2
+    w-full
     border-violet-500
     flex
     item-center
@@ -39,7 +39,7 @@ const Button: React.FC <ButtonPtops> = ({
     gap-2
     ${outline ? "bg-white": "bg-violet-500" }
     ${outline ? "text-violet-500": "text-white" }
-    ${small ? "text-sm font-light": "text-md [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-black" }
+    ${small ? "text-sm font-light": "text-md [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-black " }
     ${small ? "py-1 px-2 border[1px]": "py-3 px-4 border[2px]" }
     ${custom ? custom :''}
     `}>
