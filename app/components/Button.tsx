@@ -2,7 +2,7 @@
 
 import { IconType } from "react-icons";
 
-interface ButtonPtops{
+interface ButtonProps{
     label: string;
     disabled?: boolean;
     outline?: boolean;
@@ -13,7 +13,7 @@ interface ButtonPtops{
     => void;
 }
 
-const Button: React.FC <ButtonPtops> = ({
+const Button: React.FC <ButtonProps> = ({
     label,
     disabled,
     outline, 
@@ -43,12 +43,12 @@ const Button: React.FC <ButtonPtops> = ({
     ${small ? "py-1 px-2 border[1px]": "py-3 px-4 border[2px]" }
     ${custom ? custom :''}
     `}>
-        {/*chack if icon exsit */}
-        {Icon && <Icon size={24}/>}
-        {label}
+      {/*chack if icon exsit */}
+      {Icon && <Icon size={24}/>}
+      {label}
 
     </button>
   )
-}
+};
 
 export default Button;

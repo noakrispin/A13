@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Container from "../Container";
 import { Redressed } from "next/font/google";
+import Image from 'next/image';
 
 import { CiHome,CiUser,CiSearch,CiShoppingCart    } from "react-icons/ci";
 import logo from "./public/logo.png"
@@ -19,7 +20,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
               {/* Left side: Logo and Navigation Links */}
               <Link href="/">
-                <img src={logo.src} alt="" className="h-8"/>
+                <Image src={logo.src} alt="" className="h-8"/>
               </Link>
               {/* Navigation Links */}
               <Link href="/" className="flex items-center gap-2"><CiHome/>Home

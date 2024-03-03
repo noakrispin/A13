@@ -2,19 +2,16 @@
 
 import Button from "@/app/components/Button";
 import ProductsImg from "@/app/components/products/ProductsImg";
+import { useCart } from "@/hooks/useCart";
 import { useState } from "react";
 import { IoMdEasel } from "react-icons/io";
 import { LiaShippingFastSolid } from "react-icons/lia";
 
 interface ProductDetailsProps{
-    product: any
+    product: any;
 }
 
-const Horizontal =() => {
-  return <hr className="w-[80%] my-2  bg-violet-500"/>
-};
-
-export type CartProductType ={
+export type CartProductType = {
   id: string,
   name: string, 
   description: string,
@@ -30,11 +27,18 @@ export type SelectedImgType ={
   colorCode: string,
   image: string
 }
-const ProductDetails: React.FC<ProductDetailsProps>
-= ({product}) => {
+
+const Horizontal =() => {
+  return <hr className="w-[80%] my-2  bg-violet-500"/>
+};
+
+
+const ProductDetails: React.FC<ProductDetailsProps>=
+({product}) => {
+  const{cartTotalQty} = useCart ()
   const [cartProduct,setCartProduct]= 
   useState<CartProductType>({
-    id:product.id,
+    id: product.id,
     name: product.name, 
     description: product.description,
     Artist_Name: product.Artist_Name,
@@ -42,10 +46,13 @@ const ProductDetails: React.FC<ProductDetailsProps>
     category: product.category,
     selectedImg: {...product.images[0]},
     price: product.price
-  })
+  });
+
+  console.log(cartTotalQty);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-0 text-black">
-      <div className="">
+      <div>
         <ProductsImg cartProduct={cartProduct} product={product} />
       </div>
         <div className="w-2/3 h-2/3 p-4 bg-white shadow-md rounded-lg">
