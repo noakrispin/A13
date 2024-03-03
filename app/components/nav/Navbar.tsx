@@ -20,7 +20,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
               {/* Left side: Logo and Navigation Links */}
               <Link href="/">
-                <Image src={logo.src} alt="" className="h-8"/>
+                <img src={logo.src} alt="" className="h-8"/>
               </Link>
               {/* Navigation Links */}
               <Link href="/" className="flex items-center gap-2"><CiHome/>Home
