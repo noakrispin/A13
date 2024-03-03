@@ -24,6 +24,7 @@ const Button: React.FC <ButtonProps> = ({
 }) => {
   return (
     <button 
+    onClick={onClick}
     disabled = {disabled}
     className={`
     disabled:opacity-70
@@ -37,7 +38,7 @@ const Button: React.FC <ButtonProps> = ({
     item-center
     justify-center
     gap-2
-    ${outline ? "bg-white": "bg-violet-500" }
+    ${outline ? "bg-white ": "bg-violet-500" }
     ${outline ? "text-violet-500": "text-white" }
     ${small ? "text-sm font-light": "text-md [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-black " }
     ${small ? "py-1 px-2 border[1px]": "py-3 px-4 border[2px]" }
