@@ -55,7 +55,7 @@ const ProductDetails: React.FC<ProductDetailsProps>=
       <div>
         <ProductsImg cartProduct={cartProduct} product={product} />
       </div>
-        <div className="w-2/3 h-2/3 p-4 bg-white shadow-md rounded-lg">
+        <div className="w-2/3 p-4 bg-white shadow-md rounded-lg">
             <h2 className="text-3xl font-medium mb-6">{product.name}</h2>
 
             <div className="text-justify mb-4">{product.Artist_Name}</div>
