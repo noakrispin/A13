@@ -3,9 +3,11 @@
 import Button from "@/app/components/Button";
 import ProductsImg from "@/app/components/products/ProductsImg";
 import { useCart } from "@/hooks/useCart";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { IoMdEasel } from "react-icons/io";
 import { LiaShippingFastSolid } from "react-icons/lia";
+import { MdCheckCircle } from "react-icons/md";
 
 interface ProductDetailsProps{
     product: any;
@@ -35,7 +37,12 @@ const Horizontal =() => {
 
 const ProductDetails: React.FC<ProductDetailsProps>=
 ({product}) => {
-  const{cartTotalQty} = useCart ()
+
+  const{handleAddProductToCart,cartProducts} = useCart ();
+
+  //Checking if the product is already in the cart or not
+  const [isProductInCart, setisProductInCart]= useState(false);
+
   const [cartProduct,setCartProduct]= 
   useState<CartProductType>({
     id: product.id,
@@ -48,8 +55,22 @@ const ProductDetails: React.FC<ProductDetailsProps>=
     price: product.price
   });
 
-  console.log(cartTotalQty);
+  const router = useRouter()
 
+  console.log(cartProducts);
+
+  useEffect(()=> {
+    setisProductInCart(false)
+
+    if(cartProducts){
+      const exsitingIndex = cartProducts.findIndex((item)=> item.id == product.id)
+
+      if (exsitingIndex> -1){
+        setisProductInCart(true);
+      }
+    }
+
+  },[cartProducts])
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-0 text-black">
       <div>
@@ -68,12 +89,27 @@ const ProductDetails: React.FC<ProductDetailsProps>=
             <div className="text-justify flex items-center gap-2 md:underline"><IoMdEasel />{product.unique}</div>
             <div className="text-justify flex items-center gap-2 md:underline"><LiaShippingFastSolid />{product.Shipping}</div>
             <Horizontal/>
-            <div className="max-w-[300px]">
-              <Button 
-              label="Add To Cart"
-              onClick={()=>{}}
-              />
+            {isProductInCart ? (
+            <>
+            <p className="mb-2 text-slate-500 flex items-center gap-1">
+              <MdCheckCircle className="text-teal-400" size={20}/>
+              <span>Product added to cart</span>
+            </p>
+            <div className="max-w-[300px]"> 
+              <Button label="View Cart"  onClick={()=> {
+                router.push('/cart');
+              } }/>
             </div>
+            </>) : (
+            <>
+              <div className="max-w-[300px]">
+                <Button 
+                label="Add To Cart"
+                onClick={()=>handleAddProductToCart(cartProduct)}
+                />
+              </div>
+            </>)}
+
         </div>
     </div>
   );
