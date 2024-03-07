@@ -2,6 +2,7 @@ import Link from "next/link";
 import Container from "../Container";
 import { CiHome, CiUser, CiSearch, CiShoppingCart } from "react-icons/ci";
 import logo from "./public/logo.png";
+import CartCount from "./CartCount";
 
 const Navbar = () => {
   return (
@@ -37,7 +38,7 @@ const Navbar = () => {
 
             {/* Cart Icon with badge */}
             <div className="relative">
-              <CiShoppingCart className="cursor-pointer" />
+              <CartCount/>
               {/* Badge */}
               <div className="absolute -top-1 -right-1 bg-purple-300 text-black w-4 h-4 rounded-full flex justify-center items-center">
                 0 {/* ----------------------need to implement - count the num of items in cart---------------------- */}

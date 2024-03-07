@@ -70,7 +70,7 @@ const ProductDetails: React.FC<ProductDetailsProps>=
       }
     }
 
-  },[cartProducts])
+  },[cartProducts]);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-0 text-black">
       <div>
