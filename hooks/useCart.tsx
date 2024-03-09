@@ -3,11 +3,14 @@ import React, { createContext, useCallback, useContext, useEffect, useState } fr
 import { toast } from 'react-hot-toast';
 
 type CartContextType={
-    cartTotalAmount: number,
+    cartTotalQty: number;
+    cartTotalAmount: number;
     cartProducts: CartProductType[] | null;
     handleAddProductToCart: (product : CartProductType) => void;
     handleRemoveProductFromCart: (product : CartProductType) => void;
     handleClearCart: () => void;
+    handleCartQtyIncrease: (product : CartProductType) => void;
+    handleCartQtyDecrease: (product : CartProductType) => void;
 };
 
 
@@ -21,7 +24,9 @@ interface Props{
 }
 
 export const CartContextProvider = (props: Props) => {
-    const[cartTotalAmount, setCartTotalAmount]= useState(0)
+
+    const[cartTotalQty,setCartTotalQty]=useState(0);
+    const[cartTotalAmount, setCartTotalAmount]= useState(0);
     const [cartProducts, setcartProducts] = useState<CartProductType[] |null>(
         null
     );
@@ -38,22 +43,27 @@ export const CartContextProvider = (props: Props) => {
     useEffect(()=> {
         const getTotals = () =>{
             if(cartProducts){
-                const {total} =cartProducts?.reduce((acc,item)=>{
+                const {total, qty} = cartProducts?.reduce((acc,item)=>{
                     const itemTotal = item.price
         
                     acc.total += itemTotal 
+                    acc.qty += item.quantity
+
                     return acc
-        
                 },
                 {
-                    total: 0
-                });
+                    total: 0,
+                    qty:0,
+                }
+                );
+                setCartTotalQty(qty)
                 setCartTotalAmount(total)
             }
 
         };
-        getTotals()
-    },[cartProducts])
+        getTotals();
+    },
+    [cartProducts]);
     
     //add product to the stat
     const handleAddProductToCart = useCallback((product: CartProductType)=>{
@@ -63,16 +73,16 @@ export const CartContextProvider = (props: Props) => {
             //prev can be null or value
             if(prev){
                 updateCart=[...prev,product]
-
             }else{
                 updateCart = [product]
             }
-            
+                
             toast.success('Product added to cart');
             localStorage.setItem('FrameOfFameCartItems', JSON.stringify(updateCart));
             return updateCart;
-        });
-    },[]);
+            });
+        },[]
+    );
 
     const handleRemoveProductFromCart = useCallback((
         product:CartProductType)=>{
@@ -88,20 +98,68 @@ export const CartContextProvider = (props: Props) => {
         [cartProducts]
     );
     
+    const handleCartQtyIncrease = useCallback(
+        (product:CartProductType)=>{
+            let updateCart;
+            if(cartProducts){
+                updateCart = [...cartProducts];
+
+                const existingIndex = cartProducts.findIndex(
+                    (item) => item.id == product.id
+                );
+                if(existingIndex >-1){
+                    updateCart[existingIndex].quantity= ++ updateCart[existingIndex].quantity;
+
+                }
+
+                setcartProducts(updateCart)
+                localStorage.setItem('FrameOfFameCartItems', JSON.stringify(updateCart));
+            }
+        },
+        [cartProducts]
+    );
+
+    const handleCartQtyDecrease = useCallback(
+        (product:CartProductType)=>{
+            let updateCart;
+            if(cartProducts){
+                updateCart = [...cartProducts];
+
+                const existingIndex = cartProducts.findIndex(
+                    (item) => item.id == product.id
+                );
+                if(existingIndex > -1){
+                    updateCart[existingIndex].quantity= -- updateCart[existingIndex].quantity;
+
+                }
+
+
+                setcartProducts(updateCart)
+                localStorage.setItem('FrameOfFameCartItems', JSON.stringify(updateCart));
+            }
+        },
+        [cartProducts]
+    );
     
+
     const handleClearCart = useCallback(()=> {
         setcartProducts(null)
+        setCartTotalQty(0)
         localStorage.setItem('FrameOfFameCartItems', JSON.stringify(null));
 
-    },[cartProducts])
+        },[cartProducts]
+    );
 
 
     const value={
+        cartTotalQty,
         cartTotalAmount,
         cartProducts,
         handleAddProductToCart,
         handleRemoveProductFromCart,
         handleClearCart,
+        handleCartQtyIncrease,
+        handleCartQtyDecrease
     };
 
     return <CartContext.Provider value={value} {...props}/>

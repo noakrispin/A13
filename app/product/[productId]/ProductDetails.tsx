@@ -21,6 +21,7 @@ export type CartProductType = {
   Size: string,
   category: string,
   selectedImg: SelectedImgType,
+  quantity: number,
   price: number
 }
 
@@ -43,8 +44,7 @@ const ProductDetails: React.FC<ProductDetailsProps>=
   //Checking if the product is already in the cart or not
   const [isProductInCart, setisProductInCart]= useState(false);
 
-  const [cartProduct,setCartProduct]= 
-  useState<CartProductType>({
+  const [cartProduct,setCartProduct]= useState<CartProductType>({
     id: product.id,
     name: product.name, 
     description: product.description,
@@ -52,12 +52,12 @@ const ProductDetails: React.FC<ProductDetailsProps>=
     Size: product.Size,
     category: product.category,
     selectedImg: {...product.images[0]},
+    quantity: 1,
     price: product.price
   });
 
   const router = useRouter()
 
-  console.log(cartProducts);
 
   useEffect(()=> {
     setisProductInCart(false)

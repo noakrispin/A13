@@ -40,9 +40,6 @@ const Navbar = () => {
             <div className="relative">
               <CartCount/>
               {/* Badge */}
-              <div className="absolute -top-1 -right-1 bg-purple-300 text-black w-4 h-4 rounded-full flex justify-center items-center">
-                0 {/* ----------------------need to implement - count the num of items in cart---------------------- */}
-              </div>
             </div>
           </div>
         </div>
