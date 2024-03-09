@@ -3,6 +3,7 @@ import Container from "../Container";
 import { CiHome, CiUser, CiSearch, CiShoppingCart } from "react-icons/ci";
 import logo from "./public/logo.png";
 import CartCount from "./CartCount";
+import { FiHeart } from "react-icons/fi";
 
 const Navbar = () => {
   return (
@@ -35,6 +36,26 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-2"><CiUser />Hello, User!</Link>
             {/* ----------------------need to implement - when logged in write the name of user---------------------- */}
+
+            {/* Heart Icon ???????
+            <div className="flex items-center gap-2">
+              <FiHeart />
+              <div className="
+              absolute
+              top-[-8px] 
+              right-[-8px]
+              bg-purple-300
+              text-black
+              w-[18px]
+              h-[18px]
+              rounded-full 
+              flex 
+              justify-center 
+              items-center
+              ">
+                0
+              </div>
+            </div>*/}
 
             {/* Cart Icon with badge */}
             <div className="relative">

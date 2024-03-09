@@ -43,6 +43,7 @@ const Button: React.FC <ButtonProps> = ({
     ${small ? "text-sm font-light": "text-md [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-black " }
     ${small ? "py-1 px-2 border[1px]": "py-3 px-4 border[2px]" }
     ${custom ? custom :''}
+
     `}>
       {/*chack if icon exsit */}
       {Icon && <Icon size={24}/>}
