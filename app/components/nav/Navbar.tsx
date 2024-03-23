@@ -3,13 +3,15 @@ import Container from "../Container";
 import { CiHome, CiUser, CiSearch, CiShoppingCart } from "react-icons/ci";
 import logo from "./public/logo.png";
 import CartCount from "./CartCount";
+import { RiAdminLine } from "react-icons/ri";
 import { FiHeart } from "react-icons/fi";
+
 
 const Navbar = () => {
   return (
-    <div className="sticky top-0 w-full z-30 shadow-sm">
+    <div className="top-0 w-full z-30 shadow-sm">
       <Container>
-        <div className="text-lg bg-black text-white flex justify-between items-center py-4 relative">
+        <div className="text-lg text-white flex justify-between items-center py-4 relative">
           {/* Left side: Logo and Navigation Links */}
           <div className="flex items-center gap-4">
             <Link href="/">
@@ -17,6 +19,7 @@ const Navbar = () => {
             </Link>
             {/* Navigation Links */}
             <Link href="/" className="flex items-center gap-2"><CiHome />Home</Link>
+            <Link href="/admin" className="flex items-center gap-2"><RiAdminLine />Admin</Link>
           </div>
           {/* Middle: Search Box */}
           <div className="flex flex-grow justify-center items-center">
@@ -27,7 +30,7 @@ const Navbar = () => {
                 className="block min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-2 py-1"
               />
               {/* Search Button */}
-              <div className="absolute right-0 top-0 h-full flex items-center">
+              <div className="absolute right-1 top-0 h-full flex items-center">
                 <Link href="/" className='flex items-center gap-2'><CiSearch className="h-4 w-4" /></Link>
               </div>
             </div>
@@ -70,3 +73,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
