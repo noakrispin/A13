@@ -1,10 +1,16 @@
 datasource db {
   provider = "mongodb"
-  url      = env("DATABASE_URL")
+  url      = env("mongodb+srv://pazfayer:23N3mw1XOtbtl3Ld@cluster0.uxbsomu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 }
 
 generator client {
   provider        = "prisma-client-js"
+}
+
+type Image{
+  color String
+  colorCode String
+  image String
 }
 
 model Account {
@@ -38,6 +44,8 @@ model User {
   updateAt           DateTime @updatedAt
   role Role          @default(USER)
   accounts           Account[]
+  orders             Order[]
+  reviews            Review[]
 }
 
 enum Role{
@@ -45,3 +53,39 @@ enum Role{
     ADMIN
 }
 
+model Product{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  size String
+  price Float
+  artistName String
+  category String
+  inStock Boolean
+  image Image
+  reviews Review[]
+}
+
+model Review{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  productId String @db.ObjectId
+  rating Int
+  comment String
+  creaedDate DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Order {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+  amount Float
+  currency String
+  status String
+  deliveryStatus String?
+  creaedDate DateTime @default(now())
+  paymentIntentId String @unique
+}
