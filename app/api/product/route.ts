@@ -1,16 +1,36 @@
-import prisma from '@/libs/prismadb'
-import { NextResponse } from 'next/server'
+import prisma from "@/libs/prismadb";
+import { NextResponse } from "next/server";
 
-// const body = await request.json();
-// const {name, description, price, size, artistName, category, inStock, image} = body;
+export async function POST(request: Request) {
 
-// const product = await prisma.product.create({
-//  name,
-//  description,
-//  category,
-//  artistName,
-//  size,
-//  inStock,
-//  image,
-//  price: parseFloat(price)
-// });
+  const body = await request.json();
+  const { name, description, size, price, artistName, category, inStock, image } = body;
+
+  const product = await prisma.product.create({
+    data: {
+      name,
+      description,
+      size,
+      price: parseFloat(price),
+      artistName,
+      category,
+      inStock,
+      image,
+    },
+  });
+
+  return NextResponse.json(product);
+}
+
+export async function PUT(request: Request) {
+
+  const body = await request.json();
+  const { id, inStock } = body;
+
+  const product = await prisma.product.update({
+    where: { id: id },
+    data: { inStock },
+  });
+
+  return NextResponse.json(product);
+}
