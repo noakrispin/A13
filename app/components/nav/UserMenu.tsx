@@ -3,15 +3,15 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
-import { CiUser } from "react-icons/ci";
+
 import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
 import BackDrop from "./BackDrop";
-import { User } from "@prisma/client";
 import { SafeUser } from "@/types";
+import Avatar from "../Avatar";
 
 interface UserMenuProps{
-    currentUser: SafeUser;
+    currentUser: SafeUser | null;
 }
 
 
@@ -44,7 +44,7 @@ const UserMenu: React.FC<UserMenuProps>=({currentUser}) => {
             transition
             text-white
             ">
-                <CiUser />
+                <Avatar/>
                 <AiFillCaretDown />
 
             </div>

@@ -1,4 +1,5 @@
 import { CartProductType } from '@/app/product/[productId]/ProductDetails';
+import { Joan } from 'next/font/google';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -11,6 +12,8 @@ type CartContextType={
     handleClearCart: () => void;
     handleCartQtyIncrease: (product : CartProductType) => void;
     handleCartQtyDecrease: (product : CartProductType) => void;
+    paymentIntent: string | null; 
+    handleSetPaymentIntent: (val: string | null) => void;
 };
 
 
@@ -30,14 +33,18 @@ export const CartContextProvider = (props: Props) => {
     const [cartProducts, setcartProducts] = useState<CartProductType[] |null>(
         null
     );
-    
-    console.log('amount',cartTotalAmount);
+
+    const [paymentIntent, setPaymentIntent] = useState <string | null> (null);
+
 
     useEffect(()=>{
-        const cartItems: any = localStorage.getItem('FrameOfFameCartItems')
-        const cProducts: CartProductType[] | null = JSON.parse(cartItems)
+        const cartItems: any = localStorage.getItem('FrameOfFameCartItems');
+        const cProducts: CartProductType[] | null = JSON.parse(cartItems);
+        const FrameOfFamePaymentIntent: any= localStorage.getItem('FrameOfFamePaymentIntent');
+        const paymentIntent: string | null = JSON.parse(FrameOfFamePaymentIntent);
 
-        setcartProducts(cProducts)
+        setcartProducts(cProducts);
+        setPaymentIntent(paymentIntent);
     },[]);
 
     useEffect(()=> {
@@ -151,6 +158,12 @@ export const CartContextProvider = (props: Props) => {
     );
 
 
+    const handleSetPaymentIntent = useCallback((val: string | null)=>{
+        setPaymentIntent(val)
+        localStorage.setItem('FrameOfFamePaymentIntent',JSON.stringify(val))
+    },[paymentIntent]
+    );
+
     const value={
         cartTotalQty,
         cartTotalAmount,
@@ -159,7 +172,9 @@ export const CartContextProvider = (props: Props) => {
         handleRemoveProductFromCart,
         handleClearCart,
         handleCartQtyIncrease,
-        handleCartQtyDecrease
+        handleCartQtyDecrease,
+        paymentIntent,
+        handleSetPaymentIntent,
     };
 
     return <CartContext.Provider value={value} {...props}/>

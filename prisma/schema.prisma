@@ -88,11 +88,13 @@ type CartProductType{
   id String
   name String
   description String
+  Artist_Name String
+  Size String
   category String
-  brand String
   selectedImg Image
   quantity Int
   price Float
+
 }
 
 type Image{
