@@ -7,6 +7,12 @@ import { FieldValues,SubmitHandler, useForm } from "react-hook-form"; // Importi
 import Button from "../components/Button"; // Importing Button component
 import Link from "next/link"; // Importing Link component from Next.js
 import { AiOutlineGoogle } from "react-icons/ai";
+import axios from "axios";
+import toast from "react-hot-toast";
+import {signIn} from 'next-auth/react';
+import { callback } from "chart.js/dist/helpers/helpers.core";
+import { Router } from "next/router";
+import { useRouter } from "next/navigation";
 
 const RegisterFrom = () => {
     // State to manage loading state
@@ -24,11 +30,35 @@ const RegisterFrom = () => {
         },
     });
 
+    const router = useRouter()
+
      // Function to handle form submission
     const onSubmit: SubmitHandler<FieldValues> = (data) => 
     {
         setisLoading(true);
-        console.log(data);
+
+        axios.post('/api/register', data).then(() =>{
+            toast.success('Account created')
+
+
+            signIn('credentials',{
+                email: data.email,
+                password: data.password,
+                redirect: false,
+            }).then((callback) =>{
+                if(callback?.ok){
+                    router.push('/cart');
+                    router.refresh();
+                    toast.success('Logged In');
+                }
+                
+                if(callback?.error){
+                    toast.error(callback.error);
+                }
+            });
+        }).catch(()=> toast.error("Something went wrong")).finally(()=>{
+            setisLoading(false);
+        }); 
     };
 
   return (

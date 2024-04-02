@@ -7,6 +7,7 @@ import CartProvider from '@/providers/CartProvider';
 import { Toaster } from 'react-hot-toast';
 import NavCategory from './components/nav/NavCategory';
 
+
 const poppins = Poppins({ subsets: ['latin'], weight:
  ['400','700'] });
 
@@ -16,7 +17,15 @@ export const metadata: Metadata = {
   description: 'Frame of Fame app',
 }
 
-export default function RootLayout({children,}: {children: React.ReactNode;}) {
+
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
+
+
   return (
     <html lang="en">
       <body >

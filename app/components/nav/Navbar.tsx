@@ -5,9 +5,15 @@ import logo from "./public/logo.png";
 import CartCount from "./CartCount";
 import { RiAdminLine } from "react-icons/ri";
 import { FiHeart } from "react-icons/fi";
+import UserMenu from "./UserMenu";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 
-const Navbar = () => {
+const Navbar = async () => {
+
+  const currentUser= await getCurrentUser();
+
+
   return (
     <div className="top-0 w-full z-30 shadow-sm">
       <Container>
@@ -19,7 +25,7 @@ const Navbar = () => {
             </Link>
             {/* Navigation Links */}
             <Link href="/" className="flex items-center gap-2"><CiHome />Home</Link>
-            <Link href="/admin" className="flex items-center gap-2"><RiAdminLine />Admin</Link>
+            {/*<Link href="/admin" className="flex items-center gap-2"><RiAdminLine />Admin</Link>*/}
           </div>
           {/* Middle: Search Box */}
           <div className="flex flex-grow justify-center items-center">
@@ -37,7 +43,7 @@ const Navbar = () => {
           </div>
           {/* Right side: Account and Cart Icons */}
           <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2"><CiUser />Hello, User!</Link>
+            <Link href="/" className="flex items-center gap-2"><UserMenu currentUser={currentUser}/></Link>
             {/* ----------------------need to implement - when logged in write the name of user---------------------- */}
 
             {/* Heart Icon ???????
