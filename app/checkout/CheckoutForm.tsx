@@ -2,7 +2,7 @@
 
 import { formatPrices } from "@/Utils/formatPrices";
 import { useCart } from "@/hooks/useCart"
-import { useElements, useStripe } from "@stripe/react-stripe-js";
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { redirect } from "next/dist/server/api-utils";
 import React, { useEffect, useState } from "react"
 import toast from "react-hot-toast";
@@ -31,10 +31,12 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({clientSecret,handleSetPaymen
         handleSetPaymentSuccess(false);
     },[stripe]);
 
-    const handleSubmit : React.FormEventHandler<HTMLFormElement> = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if(!stripe || !elements){
+            // Stripe.js hasn't yet loaded.
+            // Make sure to disable form submission until Stripe.js has loaded.
             return;
         }
         setisLoading(true);
@@ -51,17 +53,18 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({clientSecret,handleSetPaymen
                 handleSetPaymentIntent(null);
             }
 
-
             setisLoading(false);
-        });
+            });
     };
     return (
         <form onSubmit={handleSubmit} id="patment-form">
-            <div className="mb-6 text-white">
-                <Heading title="Enter your details to complete checkout"/>
+            <div className="mb-6">
+                <Heading title="Enter your details to complete checkout" />
             </div>
+            <h2 className="font-semibold mt-4 mb-2">Payment Information</h2>
+            <PaymentElement/>
         </form>
     )
 };
 
-export default CheckoutForm
+export default CheckoutForm;
