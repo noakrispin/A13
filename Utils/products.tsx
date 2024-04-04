@@ -1,4 +1,3 @@
-import img1 from "./August_15.jpg";
 import img2 from "./3 of Wands.jpg";
 import img3 from "./10263573-MIFDERNS-7.jpg";
 import img4 from "./pool 17.jpg";
@@ -18,7 +17,7 @@ export const products = [
         {
           color: "White",
           colorCode: "#FFFFFF",
-          image: img1,
+          image: "https://firebasestorage.googleapis.com/v0/b/frame-of-fame.appspot.com/o/August%2015.jpg?alt=media&token=28e09c89-2144-49a1-ba62-e3e0773a6479",
         },
       ],
       reviews: [],
@@ -37,7 +36,7 @@ export const products = [
         {
           color: "Black",
           colorCode: "#000000",
-          image: img2,
+          image: "https://firebasestorage.googleapis.com/v0/b/frame-of-fame.appspot.com/o/3%20of%20Wands.jpg?alt=media&token=0958afd3-961d-4471-8445-15b5996c02a4",
         },
       ],
     },
@@ -55,7 +54,7 @@ export const products = [
         {
           color: "Black",
           colorCode: "#000000",
-          image:img3,
+          image:"https://firebasestorage.googleapis.com/v0/b/frame-of-fame.appspot.com/o/10263573-MIFDERNS-7.jpg?alt=media&token=afdfb892-9087-4f9c-ae7f-88f41a0b8548",
         },
       ],
     },
@@ -73,7 +72,7 @@ export const products = [
         {
           color: "Graphite",
           colorCode: " #383838",
-          image: img4,
+          image: "https://firebasestorage.googleapis.com/v0/b/frame-of-fame.appspot.com/o/pool%2017.jpeg?alt=media&token=58b5965a-3eb5-4d36-84fd-9aeb92efe511",
         },
       ],
     },

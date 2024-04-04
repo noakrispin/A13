@@ -18,8 +18,7 @@ type CartContextType={
 
 
 
-export const CartContext = 
-createContext<CartContextType | null>(null);
+export const CartContext = createContext<CartContextType | null>(null);
 
 interface Props{
     [propName: string] : any;
@@ -30,11 +29,11 @@ export const CartContextProvider = (props: Props) => {
 
     const[cartTotalQty,setCartTotalQty]=useState(0);
     const[cartTotalAmount, setCartTotalAmount]= useState(0);
-    const [cartProducts, setcartProducts] = useState<CartProductType[] |null>(
+    const[cartProducts, setcartProducts] = useState<CartProductType[] | null>(
         null
     );
 
-    const [paymentIntent, setPaymentIntent] = useState <string | null> (null);
+    const[paymentIntent, SetPaymentIntent] = useState <string | null> (null);
 
 
     useEffect(()=>{
@@ -44,7 +43,7 @@ export const CartContextProvider = (props: Props) => {
         const paymentIntent: string | null = JSON.parse(FrameOfFamePaymentIntent);
 
         setcartProducts(cProducts);
-        setPaymentIntent(paymentIntent);
+        SetPaymentIntent(paymentIntent);
     },[]);
 
     useEffect(()=> {
@@ -158,10 +157,10 @@ export const CartContextProvider = (props: Props) => {
     );
 
 
-    const handleSetPaymentIntent = useCallback((val: string | null)=>{
-        setPaymentIntent(val)
+    const handleSetPaymentIntent = useCallback((val: string | null) => {
+        SetPaymentIntent(val)
         localStorage.setItem('FrameOfFamePaymentIntent',JSON.stringify(val))
-    },[paymentIntent]
+        },[paymentIntent]
     );
 
     const value={

@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 import { CartProductType } from '@/app/product/[productId]/ProductDetails';
 import getCurrentUser from '@/actions/getCurrentUser';
 
-const stripe = new Stripe(process.env.STRIPE_SECRETKEY as string,
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string,
 {
     apiVersion: '2023-10-16',
 });
@@ -16,8 +16,10 @@ const calcultateOrderAmount = (items: CartProductType[]) =>{
         return acc+itemTotal;
     }, 0);
 
+    const price: any = Math.floor(totalPrice);
 
-    return totalPrice;
+
+    return price;
 };
 
 export async function POST(request:Request) {
@@ -25,13 +27,13 @@ export async function POST(request:Request) {
     const currentUser= await getCurrentUser()
 
     if(!currentUser){
-        return NextResponse.json({error: 'Unauthorized'},{status: 401})
+        return NextResponse.json({ error: 'Unauthorized'},{status: 401});
     }
 
 
-    const body = await request.json()
-    const {items, payment_intent_id} = body
-    const total = calcultateOrderAmount(items) * 100 
+    const body = await request.json();
+    const {items, payment_intent_id} = body;
+    const total = calcultateOrderAmount(items) * 100;
     const orderData={
         user: {connect: {id: currentUser.id}},
         amount: total,

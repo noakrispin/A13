@@ -1,5 +1,5 @@
 import prisma from '@/libs/prismadb'
-
+/*
 interface IParams{
     productId?: string
 }
@@ -31,4 +31,4 @@ export default async function getProductById(params: IParams){
     } catch (error: any) {
         throw new Error(error)
     }
-}
+}*/
