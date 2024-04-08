@@ -63,22 +63,23 @@ const UserMenu: React.FC<UserMenuProps>=({currentUser}) => {
                 flex-col
                 cursor-pointer
                 ">
-                    {currentUser ? <div>
-                        {/* Link to user orders */}
-                        <Link href="/orders">
-                            <MenuItem onClick={toggleOpen}>Your Orders</MenuItem>
-                        </Link>
-                        {/* Link to admin dashboard */}
-                        <Link href="/admin">
-                            <MenuItem onClick={toggleOpen}>Admin Dashboard</MenuItem>
-                        </Link>
-                        <hr />
-                        {/* Logout option */}
-                        <MenuItem onClick={()=>{
-                            toggleOpen();
-                            signOut();
-                        }}> Logout</MenuItem>
-                    </div> : <div>
+                    {currentUser ? (
+                        <div>
+                            {/* Link to user orders */}
+                            <Link href="/orders">
+                                <MenuItem onClick={toggleOpen}>Your Orders</MenuItem>
+                            </Link>
+                            {/* Link to admin dashboard */}
+                            <Link href="/admin">
+                                <MenuItem onClick={toggleOpen}>Admin Dashboard</MenuItem>
+                            </Link>
+                            <hr />
+                            {/* Logout option */}
+                            <MenuItem onClick={()=>{
+                                toggleOpen();
+                                signOut();
+                            }}> Logout</MenuItem>
+                        </div>) : <div>
                         {/* Link to login */}
                         <Link href="/login">
                             <MenuItem onClick={toggleOpen}>Login</MenuItem>

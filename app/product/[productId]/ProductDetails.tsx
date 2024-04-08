@@ -59,18 +59,17 @@ const ProductDetails: React.FC<ProductDetailsProps>=
   const router = useRouter()
 
 
-  useEffect(()=> {
-    setisProductInCart(false)
-
-    if(cartProducts){
-      const exsitingIndex = cartProducts.findIndex((item)=> item.id == product.id)
-
-      if (exsitingIndex> -1){
+  useEffect(() => {
+    setisProductInCart(false);
+  
+    if (cartProducts) {
+      const existingIndex = cartProducts.findIndex((item) => item.id === product.id);
+  
+      if (existingIndex > -1) {
         setisProductInCart(true);
       }
     }
-
-  },[cartProducts]);
+  }, [cartProducts]);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-0 text-black">
       <div>

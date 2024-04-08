@@ -1,3 +1,5 @@
+// pages/api/create-payment-intent.ts
+
 import Stripe from 'stripe'
 import prisma from '@/libs/prismadb'
 import { NextResponse } from 'next/server'
@@ -18,13 +20,12 @@ const calcultateOrderAmount = (items: CartProductType[]) =>{
 
     const price: any = Math.floor(totalPrice);
 
-
     return price;
 };
 
 export async function POST(request:Request) {
 
-    const currentUser= await getCurrentUser()
+    const currentUser= await getCurrentUser();
 
     if(!currentUser){
         return NextResponse.json({ error: 'Unauthorized'},{status: 401});

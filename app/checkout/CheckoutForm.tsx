@@ -2,11 +2,15 @@
 
 import { formatPrices } from "@/Utils/formatPrices";
 import { useCart } from "@/hooks/useCart"
-import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { AddressElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { redirect } from "next/dist/server/api-utils";
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Heading from "../components/Heading";
+import { layouts } from "chart.js";
+import Button from "../components/Button";
+
+
 
 interface CheckoutFormProps{
     clientSecret: string,
@@ -61,10 +65,25 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({clientSecret,handleSetPaymen
             <div className="mb-6">
                 <Heading title="Enter your details to complete checkout" />
             </div>
-            <h2 className="font-semibold mt-4 mb-2">Payment Information</h2>
-            <PaymentElement/>
+            <h2 className="font-semibold mb-2 text-white">
+                Address Information
+            </h2>
+            <AddressElement 
+                options={{
+                    mode: 'shipping',
+                    allowedCountries: ['Israel', 'USA'],
+                }}
+            />
+            <h2 className="font-semibold mt-4 mb-2 text-white">Payment Information</h2>
+            <PaymentElement id='payment-element' options={{layout: 'tabs'}}/>
+            <div className="py-4 text-center text-2xl font-bold text-white">
+                Total: {formattedPrice}
+            </div>
+            <Button label={isLoading ? 'Processing' : 'Pay now'} 
+            disabled={isLoading || !stripe || !elements} 
+            onClick={()=>{}}/>
         </form>
-    )
+    );
 };
 
 export default CheckoutForm;

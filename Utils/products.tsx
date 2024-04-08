@@ -1,6 +1,3 @@
-import img2 from "./3 of Wands.jpg";
-import img3 from "./10263573-MIFDERNS-7.jpg";
-import img4 from "./pool 17.jpg";
 
 export const products = [
     {
@@ -73,6 +70,7 @@ export const products = [
           color: "Graphite",
           colorCode: " #383838",
           image: "https://firebasestorage.googleapis.com/v0/b/frame-of-fame.appspot.com/o/pool%2017.jpeg?alt=media&token=58b5965a-3eb5-4d36-84fd-9aeb92efe511",
+          
         },
       ],
     },
