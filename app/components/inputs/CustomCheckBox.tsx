@@ -1,30 +1,30 @@
+// Specify usage of client-side code
 "use client";
 
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
+// Define props interface for CustomCheckBox component
 interface CustomCheckBoxProps {
-  id: string;
-  label: string;
-  disabled?: boolean;
-  register: UseFormRegister<FieldValues>;
+  id: string; // Unique identifier for the checkbox
+  label: string; // Label text for the checkbox
+  disabled?: boolean; // Optional boolean indicating if the checkbox is disabled
+  register: UseFormRegister<FieldValues>; // useFormRegister hook from react-hook-form
 }
 
-const CustomCheckBox: React.FC<CustomCheckBoxProps> = ({
-  id,
-  label,
-  disabled,
-  register,
-}) => {
+// Define CustomCheckBox component
+const CustomCheckBox: React.FC<CustomCheckBoxProps> = ({ id, label, disabled, register }) => {
   return (
     <div className="w-full flex flex-row gap-2 items-center text-white">
+      {/* Render checkbox input */}
       <input
         type="checkbox"
         id={id}
         disabled={disabled}
-        {...register(id)}
+        {...register(id)} // Register checkbox input with react-hook-form
         placeholder=""
-        className="cursor-pointer"
+        className="cursor-pointer" // Apply cursor pointer style
       />
+      {/* Render label for the checkbox */}
       <label htmlFor={id} className="font-medium cursor-pointer">
         {label}
       </label>
@@ -32,4 +32,4 @@ const CustomCheckBox: React.FC<CustomCheckBoxProps> = ({
   );
 };
 
-export default CustomCheckBox;
+export default CustomCheckBox; // Export CustomCheckBox component

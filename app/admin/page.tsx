@@ -1,7 +1,7 @@
+
 const Admin = ()=> {
  return (
-   <div
-   className="pt-8 text-white">
+   <div className="pt-8 text-white">
     Admin Dashboard
    </div>
  );

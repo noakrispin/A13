@@ -1,5 +1,6 @@
 "use client";
 
+// Import necessary modules and components
 import Button from "@/app/components/Button";
 import Heading from "@/app/components/Heading";
 import CategoryInput from "@/app/components/inputs/CategoryInput";
@@ -12,16 +13,12 @@ import { categories } from "@/Utils/Categories";
 import { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getDownloadURL, getStorage, ref,uploadBytesResumable} from "firebase/storage";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { colors } from "@/Utils/Colors";
 
+// Define types for image and uploaded image
 export type ImageType = {
   color: string;
   colorCode: string;
@@ -34,12 +31,16 @@ export type UploadedImageType = {
   image: string;
 };
 
+// Define AddProductForm component
 const AddProductForm = () => {
+  // State variables
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState<ImageType[] | null>();
   const [isProductCreated, setIsProductCreated] = useState(false);
 
+
+  // Initialize React hook form
   const {
     register,
     handleSubmit,
@@ -51,16 +52,16 @@ const AddProductForm = () => {
     defaultValues: {
       name: "",
       description: "",
-      brand: "",
+      Size: "", 
+      Artist_Name: "",
       category: "",
       inStock: false,
       images: [],
       price: "",
     },
   });
-
-  useEffect(() => {
-    setCustomValue("images", images);
+  // useEffect hook to reset form and images state when product is created
+  useEffect(() => {setCustomValue("images", images);    
   }, [images]);
 
   useEffect(() => {
@@ -70,7 +71,7 @@ const AddProductForm = () => {
       setIsProductCreated(false);
     }
   }, [isProductCreated]);
-
+  // Function to handle form submission
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log("Product Data", data);
     // upload images to fb
@@ -87,17 +88,19 @@ const AddProductForm = () => {
       setIsLoading(false);
       return toast.error("No selected image!");
     }
-
+    // Function to handle image uploads to Firebase Storage
     const handleImageUploads = async () => {
       toast("Creating product, please wait..");
       try {
+        // Loop through each image in data.images
         for (const item of data.images) {
           if (item.image) {
+            // Upload image to Firebase Storage
             const fileName = new Date().getTime() + "-" + item.image.name;
             const storage = getStorage(firebaseApp);
             const storageRef = ref(storage, `products/${fileName}`);
             const uploadTask = uploadBytesResumable(storageRef, item.image);
-
+            // Monitor upload progress and get download URL
             await new Promise<void>((resolve, reject) => {
               uploadTask.on(
                 "state_changed",
@@ -121,6 +124,7 @@ const AddProductForm = () => {
                 () => {
                   getDownloadURL(uploadTask.snapshot.ref)
                     .then((downloadURL) => {
+                      // Add uploaded image data to uploadedImages array
                       uploadedImages.push({
                         ...item,
                         image: downloadURL,
@@ -143,10 +147,12 @@ const AddProductForm = () => {
         return toast.error("Error handling image uploads");
       }
     };
-
+    // Handle image uploads
     await handleImageUploads();
+    // Prepare product data with uploaded image URLs
     const productData = { ...data, images: uploadedImages };
 
+    // Send product data to backend API for saving to MongoDB
     axios
       .post("/api/product", productData)
       .then(() => {
@@ -162,8 +168,9 @@ const AddProductForm = () => {
       });
   };
 
+  // Watch category selection
   const category = watch("category");
-
+  // Function to set custom form value
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -172,6 +179,7 @@ const AddProductForm = () => {
     });
   };
 
+  // Function to add image to state
   const addImageToState = useCallback((value: ImageType) => {
     setImages((prev) => {
       if (!prev) {
@@ -181,7 +189,7 @@ const AddProductForm = () => {
       return [...prev, value];
     });
   }, []);
-
+  // Function to remove image from state
   const removeImageFromState = useCallback((value: ImageType) => {
     setImages((prev) => {
       if (prev) {
@@ -195,9 +203,12 @@ const AddProductForm = () => {
     });
   }, []);
 
+  // Render form components
   return (
     <>
-      <Heading title="Add a Product" center />
+      {/* Heading for the form */}
+      <Heading title="Add a Product" center/>
+      {/* Input fields for Name, Price, Artist Name, Size, and Description */}
       <Input
         id="name"
         label="Name"
@@ -216,7 +227,7 @@ const AddProductForm = () => {
         required
       />
       <Input
-        id="artistName"
+        id="Artist_Name"
         label="Artist Name"
         disabled={isLoading}
         register={register}
@@ -224,7 +235,7 @@ const AddProductForm = () => {
         required
       />
       <Input
-        id="size"
+        id="Size"
         label="Size"
         disabled={isLoading}
         register={register}
@@ -238,18 +249,20 @@ const AddProductForm = () => {
         errors={errors}
         required
       />
+       {/* Checkbox for indicating whether the product is in stock */}
       <CustomCheckBox
         id="inStock"
         register={register}
         label="This product is in stock"
       />
+      {/* Category selection */}
       <div className="w-full font-medium">
         <div className="mb-2 font-semibold text-white">Select a Category</div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h[50vh] overflow-y-auto text-white">
-          {categories.map((item) => {
-            if (item.label === "All") {
-              return null;
-            }
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h[50vh] overflow-y-auto text-white">
+            {categories.map((item) => {
+              if (item.label === "All") {
+                return null;
+              }
 
             return (
               <div key={item.label} className="col-span">
@@ -264,16 +277,18 @@ const AddProductForm = () => {
           })}
         </div>
       </div>
+      {/* Image upload section */}
       <div className="w-full flex flex-col flex-wrap gap-4">
         <div>
           <div className="font-bold text-white">
             Upload image of your artwork.
           </div>
           <div className="text-sm  text-white">
-          First, you must commit that the creation is yours alone in order to avoid copyright infringement.
+            First, you must commit that the creation is yours alone in order to avoid copyright infringement.
           </div>
         </div>
         <div className="text-white gap-3">
+          {/* Render SelectColor component for each color */}
           {colors.map((item, index) => {
             return (
               <SelectColor
@@ -287,6 +302,7 @@ const AddProductForm = () => {
           })}
         </div>
       </div>
+      {/* Button for submitting the form */}
       <Button
         label={isLoading ? "Loading..." : "Add Product"}
         onClick={handleSubmit(onSubmit)}

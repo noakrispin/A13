@@ -1,10 +1,11 @@
+
+
 const ManageOrders = ()=> {
- return (
-   <div
-   className="pt-8 text-white">
+  return (
+  <div className="pt-8 text-white">
     ManageOrders
-   </div>
- );
+  </div>
+  );
 };
 
 export default ManageOrders;

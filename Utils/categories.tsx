@@ -1,28 +1,30 @@
+// Import necessary icons from react-icons
 import { MdStorefront } from "react-icons/md";
 import { HiPaintBrush } from "react-icons/hi2";
 import { TbPhoto } from "react-icons/tb";
 import { GiSpartanHelmet } from "react-icons/gi";
 import { RiNftFill } from "react-icons/ri";
 
+// Define an array of categories
 export const categories = [
   {
-    label: "All",
-    icon: MdStorefront,
+    label: "All", // Label for the category
+    icon: MdStorefront, // Icon component for the category
   },
   {
-    label: "Painting",
-    icon: HiPaintBrush,
+    label: "Painting", // Label for the category
+    icon: HiPaintBrush, // Icon component for the category
   },
   {
-    label: "Photography",
-    icon: TbPhoto,
+    label: "Photography", // Label for the category
+    icon: TbPhoto, // Icon component for the category
   },
   {
-    label: "Sculpture",
-    icon: GiSpartanHelmet,
+    label: "Sculpture", // Label for the category
+    icon: GiSpartanHelmet, // Icon component for the category
   },
   {
-    label: "Nft",
-    icon: RiNftFill,
+    label: "Nft", // Label for the category
+    icon: RiNftFill, // Icon component for the category
   },
 ];
