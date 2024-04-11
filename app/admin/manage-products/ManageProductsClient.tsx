@@ -8,12 +8,14 @@ import Heading from "@/app/components/Heading";
 import Status from "@/app/components/Status";
 import {MdCached,MdClose,MdDelete,MdDone,MdRemoveRedEye} from "react-icons/md";
 import ActionBtn from "@/app/components/ActionBtn";
-import { useCallback, useEffect } from "react";
+import { JSX, useCallback, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import firebaseApp from "@/libs/firebase";
+import Checkbox, { CheckboxProps } from "@mui/material/Checkbox";
+
 
 
 // Define interface for props
@@ -183,6 +185,18 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
     };
   }, []);
 
+  const CustomWhiteCheckbox = (props: JSX.IntrinsicAttributes & CheckboxProps) => (
+    <Checkbox
+        {...props}
+        sx={{
+            color: 'white', // Checkbox color when not checked
+            '&.Mui-checked': {
+                color: 'white', // Checkbox color when checked
+            },
+        }}
+    />
+);
+
   // Render the component
   return (
     <div className="max-w-[1150px] m-auto text-xl">
@@ -190,19 +204,45 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
         <Heading title="Manage Products" center />
       </div>
       <div style={{ height: 600, width: "100%"}}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          style={{ color: 'white' }} // Apply text color directly to DataGrid
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 9 },
-            },
-          }}
-          pageSizeOptions={[9, 20]}
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
+      <DataGrid
+    rows={rows}
+    columns={columns}
+    style={{ color: 'white' }}
+    initialState={{
+        pagination: {
+            paginationModel: { page: 0, pageSize: 9 },
+        },
+    }}
+    pageSizeOptions={[9, 20]}
+    checkboxSelection
+    disableRowSelectionOnClick
+    components={{
+      BaseCheckbox: CustomWhiteCheckbox,
+  }}
+    sx={{
+        // Apply white color to all row text
+        '& .MuiDataGrid-row': {
+            color: 'white',
+        },
+        // Apply white color to column headers
+        '& .MuiDataGrid-columnHeader': {
+            color: 'white',
+        },
+        // Apply white color to the footer container and pagination toolbar
+        '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
+            color: 'white',
+        },
+        // Apply white color to the selected row count footer text
+        '& .Mui-selected': {
+            color: 'white',
+        },
+        // Apply white color to pagination controls and rows per page text
+        '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
+            color: 'white',
+        },
+    }}
+/>
+
       </div>
     </div>
   );

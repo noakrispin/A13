@@ -7,7 +7,7 @@ import { truncateText } from "@/Utils/truncateText";
 import ProductsCard from "./components/products/ProductsCard";
 import { category } from "@/Utils/category";
 import Button from "./components/Button";
-import NavCategory from "./components/nav/NavCategory";
+import NavCategory from "./components/nav/CategoryNav";
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -36,7 +36,6 @@ async function run() {
 }
 run().catch(console.dir);
 
-
 export default function Home() {
   return (
     <div className="p-8">
@@ -47,7 +46,7 @@ export default function Home() {
         {/*Buttom for category */}
         <div>
           <NavCategory/>
-        </div >
+        </div > 
 
         <div className=" text-white text-2xl
          border-b-[1px] border-violet-500 py-3 flex justify-between gap-4"> 
