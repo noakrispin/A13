@@ -22,7 +22,7 @@ const Navbar = async () => {
           {/* Left side: Logo and Navigation Links */}
           <div className="flex items-center gap-4">
             <Link href="/">
-              <Image src={logo.src} alt="" className="h-8" />
+              <img src={logo.src} alt="" className="h-8" />
             </Link>
             {/* Navigation Links */}
             <Link href="/" className="flex items-center gap-2"><CiHome />Home</Link>
