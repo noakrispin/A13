@@ -29,7 +29,7 @@ const ActionBtn: React.FC<ActionBtnProps> = ({
         ${disabled && "opacity-50 cursor-not-allowed"}
     `}
     >
-      <Icon size={18} />
+      <Icon size={18} color={"white"}/>
     </button>
   );
 };

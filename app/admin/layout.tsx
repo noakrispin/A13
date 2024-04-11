@@ -1,4 +1,3 @@
-
 // Import AdminNav component from '../components/admin/AdminNav'
 import AdminNav from "../components/admin/AdminNav";
 

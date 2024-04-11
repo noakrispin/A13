@@ -5,7 +5,6 @@ import Navbar from './components/nav/Navbar';
 import Footer from './components/footer/Footer';
 import CartProvider from '@/providers/CartProvider';
 import { Toaster } from 'react-hot-toast';
-import NavCategory from './components/nav/NavCategory';
 
 
 const poppins = Poppins({ subsets: ['latin'], weight:

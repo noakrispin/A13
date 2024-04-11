@@ -1,4 +1,3 @@
-// Specify usage of client-side code
 "use client";
 
 import { FieldValues, UseFormRegister } from "react-hook-form";

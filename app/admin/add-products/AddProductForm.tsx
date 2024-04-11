@@ -9,7 +9,7 @@ import Input from "@/app/components/inputs/Input";
 import SelectColor from "@/app/components/inputs/SelectColor";
 import TextArea from "@/app/components/inputs/TextArea";
 import firebaseApp from "@/libs/firebase";
-import { categories } from "@/Utils/Categories";
+import { categories } from "@/Utils/categories";
 import { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
