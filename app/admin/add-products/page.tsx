@@ -1,3 +1,4 @@
+export const revalidate=0; 
 
 // Import necessary dependencies
 import Container from "@/app/components/Container";

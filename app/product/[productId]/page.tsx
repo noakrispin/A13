@@ -1,3 +1,5 @@
+export const revalidate=0; 
+
 import Container from "@/app/components/Container";
 import ProductDetails from "./ProductDetails";
 import { products } from "@/Utils/products";

@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 
   // If no current user or current user is not an admin, return an error response
   if(!currentUser || currentUser.role != 'ADMIN'){
-    return NextResponse.error()
+    return NextResponse.error();
   }
 
   // Parse request body
