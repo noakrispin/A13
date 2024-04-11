@@ -47,7 +47,10 @@ const CheckoutClient = () => {
                 if (res.status === 401) {
                     return router.push('/login');
                 }
-    
+                //
+                if (!res.ok) {
+                    throw new Error('Failed to fetch payment intent');
+                }
                 return res.json();
     
             }).then((data) => {

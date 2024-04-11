@@ -9,6 +9,8 @@ import { IoMdEasel } from "react-icons/io";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { MdCheckCircle } from "react-icons/md";
 
+
+
 interface ProductDetailsProps{
     product: any;
 }
@@ -56,7 +58,7 @@ const ProductDetails: React.FC<ProductDetailsProps>=
     price: product.price
   });
 
-  const router = useRouter()
+  const router = useRouter();
 
 
   useEffect(() => {

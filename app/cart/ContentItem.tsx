@@ -10,7 +10,12 @@ interface ContentItemProps {
 }
 
 const ContentItem: React.FC<ContentItemProps> = ({ item }) => {
-  const {handleRemoveProductFromCart} = useCart()
+  const {handleRemoveProductFromCart} = useCart();
+
+  const handleRemoveClick = () => {
+    handleRemoveProductFromCart(item);
+  };
+
   return (
     <div className="
       grid
@@ -46,9 +51,20 @@ const ContentItem: React.FC<ContentItemProps> = ({ item }) => {
             {truncateText(item.name)}
           </Link>
           <div>
-            <button className="text-violet-500 underline" onClick={() => 
+           {/* <button className="text-violet-500 underline" onClick={() => 
               handleRemoveProductFromCart (item)}>
               Remove
+           </button>*/}
+            <button
+              className="text-violet-500 underline"
+              onClick={handleRemoveClick}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === "Space") {
+                  handleRemoveClick();
+                }
+              }}
+            >
+            Remove
             </button>
           </div>
         </div>

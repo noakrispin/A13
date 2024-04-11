@@ -1,9 +1,7 @@
 export const revalidate=0; 
-
 import Container from "@/app/components/Container";
 import ProductDetails from "./ProductDetails";
 import { products } from "@/Utils/products";
-//import { product } from "@/Utils/product";
 
 interface IParams {
     productId?: string;
@@ -12,11 +10,18 @@ interface IParams {
 const Product = ({ params }: { params: IParams }) => {
     console.log('params', params);
 
-    const product= products.find((item)=>item.id == params.productId)
+    // Find the product by ID
+    const product = params.productId ? products.find(item => item.id === params.productId) : undefined;
+
     return (
         <div className="p-8">
             <Container>
-                <ProductDetails product={product}/>
+                 {/* Render ProductDetails if product is found, otherwise show a message */}
+                 {product ? (
+                    <ProductDetails product={product} />
+                ) : (
+                    <p>Product not found.</p>
+                )}
             </Container>
         </div>
     );
