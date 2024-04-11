@@ -1,7 +1,3 @@
 {
-  "extends": ["next/core-web-vitals"],
-  "rules": {
-    // Add custom rules here
-    "my-custom-rule": "error"
-  }
+  "extends": "next/core-web-vitals"
 }

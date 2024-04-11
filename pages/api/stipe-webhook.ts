@@ -19,7 +19,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const buf = await buffer(req);
+    //const buf = await buffer(req);
     const sig = req.headers['stripe-signature'];
 
     if(!sig){
@@ -28,8 +28,17 @@ export default async function handler(
     let event: Stripe.Event;
 
     try {
-        event = stripe.webhooks.constructEvent(
+        /*event = stripe.webhooks.constructEvent(
             buf,
+            sig,
+            process.env.STRIPE_WEBHOOK_SECRET!
+        );*/
+        // Read the raw request body
+        const rawBody = await buffer(req);
+
+        // Verify the Stripe signature
+        event = stripe.webhooks.constructEvent(
+            rawBody,
             sig,
             process.env.STRIPE_WEBHOOK_SECRET!
         );
