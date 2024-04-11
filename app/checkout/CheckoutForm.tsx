@@ -10,8 +10,6 @@ import Heading from "../components/Heading";
 import { layouts } from "chart.js";
 import Button from "../components/Button";
 
-
-
 interface CheckoutFormProps{
     clientSecret: string,
     handleSetPaymentSuccess: (value: boolean) => void
@@ -25,15 +23,10 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({clientSecret,handleSetPaymen
     const [isLoading, setisLoading]=useState(false);
     const formattedPrice = formatPrices(cartTotalAmount);
 
-    useEffect(()=>{
-        if(!stripe){
-            return; 
-        }
-        if(!clientSecret){
-            return;
-        }
+    useEffect(() => {
+        if (!stripe || !clientSecret) return;
         handleSetPaymentSuccess(false);
-    },[stripe]);
+    }, [stripe, clientSecret, handleSetPaymentSuccess]); //
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -55,6 +48,14 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({clientSecret,handleSetPaymen
                 handleClearCart();
                 handleSetPaymentSuccess(true);
                 handleSetPaymentIntent(null);
+            }
+            else{
+                // Handle payment error
+                if (result.error.message) {
+                toast.error(result.error.message);
+                } else {
+                toast.error('Payment failed');
+                }
             }
 
             setisLoading(false);

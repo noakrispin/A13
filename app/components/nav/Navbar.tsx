@@ -8,6 +8,7 @@ import { FiHeart } from "react-icons/fi";
 import UserMenu from "./UserMenu";
 import getCurrentUser from "@/actions/getCurrentUser";
 
+import Image from 'next/image'; // Import Image component from next/image
 
 const Navbar = async () => {
 

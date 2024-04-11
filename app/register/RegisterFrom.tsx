@@ -41,7 +41,7 @@ const RegisterFrom: React.FC<RegisterFromProps> = ({currentUser}) => {
             router.push('/cart')
             router.refresh();
         }
-    },[]);
+    },[currentUser]);
 
      // Function to handle form submission
     const onSubmit: SubmitHandler<FieldValues> = (data) => 
@@ -49,7 +49,7 @@ const RegisterFrom: React.FC<RegisterFromProps> = ({currentUser}) => {
         setisLoading(true);
 
         axios.post('/api/register', data).then(() =>{
-            toast.success('Account created')
+            toast.success('Account created');
 
 
             signIn('credentials',{
@@ -58,6 +58,7 @@ const RegisterFrom: React.FC<RegisterFromProps> = ({currentUser}) => {
                 redirect: false,
             }).then((callback) =>{
                 if(callback?.ok){
+                    
                     router.push('/cart');
                     router.refresh();
                     toast.success('Logged In');

@@ -11,6 +11,7 @@ const ManageOrders = async () => {
   if (!currentUser || currentUser.role != "ADMIN") {
     return <NullData title="Oops! Access denied" />;
   }
+export const revalidate=0; 
 
   return (
     <div className="pt-8">

@@ -1,3 +1,6 @@
+export const revalidate=0; 
+
+// Import statements for dependencies
 import getCurrentUser from "@/actions/getCurrentUser";
 import Container from "../components/Container";
 import CartClient from "./CartClient";
@@ -6,7 +9,7 @@ import CartClient from "./CartClient";
 const Cart =  async()=> { 
 
   // Asynchronously retrieving the current user
-  const currentUser= await getCurrentUser()
+  const currentUser= await getCurrentUser();
 
   // Returning JSX for rendering
   return (
@@ -17,7 +20,6 @@ const Cart =  async()=> {
         {/* Passing the currentUser object as a prop to the CartClient component */}
         <CartClient currentUser={currentUser}/>
       </Container>
-
     </div>
   );
 };

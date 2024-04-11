@@ -13,7 +13,13 @@ const SetQantity: React.FC<SetQantityProps>= ({
     cartProduct, cartCounter, handleQtyIncrease, handleQtyDecrease
 }) => {
   return (
-    <div>SetQantity</div>
+    <div>
+    {/* Replace this placeholder div with actual UI elements */}
+    {/* For example, buttons to increase and decrease quantity */}
+    <button onClick={handleQtyDecrease}>-</button>
+    <span>{cartProduct.quantity}</span>
+    <button onClick={handleQtyIncrease}>+</button>
+  </div>
   )
 };
 

@@ -18,6 +18,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { colors } from "@/Utils/Colors";
 
+
 // Define types for image and uploaded image
 export type ImageType = {
   color: string;
@@ -70,7 +71,8 @@ const AddProductForm = () => {
       setImages(null);
       setIsProductCreated(false);
     }
-  }, [isProductCreated]);
+  }, [isProductCreated,reset]); //reset
+
   // Function to handle form submission
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log("Product Data", data);
@@ -170,14 +172,17 @@ const AddProductForm = () => {
 
   // Watch category selection
   const category = watch("category");
+
   // Function to set custom form value
-  const setCustomValue = (id: string, value: any) => {
+  const setCustomValue = useCallback((id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
     });
-  };
+  },
+  [setValue]
+);
 
   // Function to add image to state
   const addImageToState = useCallback((value: ImageType) => {
@@ -188,7 +193,8 @@ const AddProductForm = () => {
 
       return [...prev, value];
     });
-  }, []);
+  }, [setImages]);
+
   // Function to remove image from state
   const removeImageFromState = useCallback((value: ImageType) => {
     setImages((prev) => {
@@ -201,7 +207,7 @@ const AddProductForm = () => {
 
       return prev;
     });
-  }, []);
+  }, [setImages]);
 
   // Render form components
   return (

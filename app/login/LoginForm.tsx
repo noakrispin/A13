@@ -40,6 +40,7 @@ const LoginForm: React.FC<LoginFormProps> = ({currentUser}) => {
             router.push('/cart')
             router.refresh();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
      // Function to handle form submission

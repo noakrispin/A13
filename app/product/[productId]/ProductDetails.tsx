@@ -9,6 +9,8 @@ import { IoMdEasel } from "react-icons/io";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { MdCheckCircle } from "react-icons/md";
 
+
+
 interface ProductDetailsProps{
     product: any;
 }
@@ -56,7 +58,7 @@ const ProductDetails: React.FC<ProductDetailsProps>=
     price: product.price
   });
 
-  const router = useRouter()
+  const router = useRouter();
 
 
   useEffect(() => {
@@ -69,7 +71,8 @@ const ProductDetails: React.FC<ProductDetailsProps>=
         setisProductInCart(true);
       }
     }
-  }, [cartProducts]);
+  }, [cartProducts, product.id]); // Include product.id in the dependency array
+  
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-0 text-black">
       <div>
