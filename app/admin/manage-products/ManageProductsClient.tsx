@@ -133,7 +133,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
         toast.error("Oops! Something went wrong");
         console.log(err);
       });
-  }, []);
+  }, [router]); // Include router in the dependency array
 
   // Function to handle deleting a product
   const handleDelete = useCallback(async (id: string, images: any[]) => {
@@ -167,7 +167,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
         toast.error("Failed to delete product");
         console.log(err);
       });
-  }, []);
+  }, [router,storage]); // Include router and storage in the dependency array
 
   useEffect(() => {
     const style = document.createElement("style");

@@ -8,6 +8,7 @@ import { FiHeart } from "react-icons/fi";
 import UserMenu from "./UserMenu";
 import getCurrentUser from "@/actions/getCurrentUser";
 
+import Image from 'next/image'; // Import Image component from next/image
 
 const Navbar = async () => {
 
@@ -21,7 +22,7 @@ const Navbar = async () => {
           {/* Left side: Logo and Navigation Links */}
           <div className="flex items-center gap-4">
             <Link href="/">
-              <img src={logo.src} alt="" className="h-8" />
+              <Image src={logo.src} alt="" className="h-8" />
             </Link>
             {/* Navigation Links */}
             <Link href="/" className="flex items-center gap-2"><CiHome />Home</Link>

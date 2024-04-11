@@ -36,7 +36,7 @@ const SelectColor: React.FC<SelectColorProps> = ({
   const handleFileChange = useCallback((value: File) => {
     setFile(value);
     addImageToState({ ...item, image: value });
-  }, []);
+  }, [addImageToState, item]);//
 
   // Handle checkbox change
   const handleCheck = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +46,7 @@ const SelectColor: React.FC<SelectColorProps> = ({
       setFile(null);
       removeImageFromState(item);
     }
-  }, []);
+  }, [removeImageFromState, item]); //
 
   // Render SelectColor component
   return (

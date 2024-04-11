@@ -69,7 +69,8 @@ const ProductDetails: React.FC<ProductDetailsProps>=
         setisProductInCart(true);
       }
     }
-  }, [cartProducts]);
+  }, [cartProducts, product.id]); // Include product.id in the dependency array
+  
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-0 text-black">
       <div>

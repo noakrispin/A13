@@ -17,7 +17,7 @@ const SelectImage: React.FC<SelectImageProps> = ({item,handleFileChange}) => {
     if (acceptedFiles.length > 0) {
       handleFileChange(acceptedFiles[0]);
     }
-  }, []);
+  }, [handleFileChange]);
 
   // useDropzone hook to handle file drop
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

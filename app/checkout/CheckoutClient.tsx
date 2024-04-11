@@ -31,12 +31,11 @@ const CheckoutClient = () => {
     console.log("clientSecret",clientSecret);
 
     useEffect(() => {
-        //create a payment intent as soon as the page loads
-        if (cartProducts){ //&& paymentIntent) {
+        if (cartProducts) {
             setLoading(true);
             setError(false);
     
-            fetch("/api/create-payment-intent", { 
+            fetch("/api/create-payment-intent", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -57,10 +56,10 @@ const CheckoutClient = () => {
             }).catch((error) => {
                 setError(true);
                 console.log("Error", error);
-                toast.error('Something went wrong');
+                toast.error('Failed to fetch payment intent');
             });
         }
-    }, [cartProducts, paymentIntent]);//, handleSetPaymentIntent]);
+    }, [cartProducts, paymentIntent, handleSetPaymentIntent, router]); //
 
     const options: StripeElementsOptions = {
         clientSecret,

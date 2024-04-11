@@ -25,15 +25,15 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({clientSecret,handleSetPaymen
     const [isLoading, setisLoading]=useState(false);
     const formattedPrice = formatPrices(cartTotalAmount);
 
-    useEffect(()=>{
-        if(!stripe){
-            return; 
+    useEffect(() => {
+        if (!stripe) {
+            return;
         }
-        if(!clientSecret){
+        if (!clientSecret) {
             return;
         }
         handleSetPaymentSuccess(false);
-    },[stripe]);
+    }, [stripe, clientSecret, handleSetPaymentSuccess]); //
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
