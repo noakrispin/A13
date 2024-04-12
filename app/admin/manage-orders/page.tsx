@@ -1,3 +1,5 @@
+export const revalidate=0; 
+
 import Container from "@/app/components/Container";
 import ManageOrdersClient from "./ManageOrdersClient";
 import getCurrentUser from "@/actions/getCurrentUser";
@@ -11,7 +13,6 @@ const ManageOrders = async () => {
   if (!currentUser || currentUser.role != "ADMIN") {
     return <NullData title="Oops! Access denied" />;
   }
-export const revalidate=0; 
 
   return (
     <div className="pt-8">
