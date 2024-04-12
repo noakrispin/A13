@@ -1,14 +1,10 @@
 import Link from "next/link";
 import Container from "../Container";
-import { CiHome, CiUser, CiSearch, CiShoppingCart } from "react-icons/ci";
+import { CiHome, CiSearch } from "react-icons/ci";
 import logo from "./public/logo.png";
 import CartCount from "./CartCount";
-import { RiAdminLine } from "react-icons/ri";
-import { FiHeart } from "react-icons/fi";
 import UserMenu from "./UserMenu";
 import getCurrentUser from "@/actions/getCurrentUser";
-
-import Image from 'next/image'; // Import Image component from next/image
 
 const Navbar = async () => {
 
@@ -18,7 +14,7 @@ const Navbar = async () => {
   return (
     <div className="top-0 w-full z-30 shadow-sm">
       <Container>
-        <div className="text-lg text-white flex justify-between items-center py-4 relative">
+        <div className="text-lg text-white flex flex-col sm:flex-row justify-between items-center py-4 relative">
           {/* Left side: Logo and Navigation Links */}
           <div className="flex items-center gap-4">
             <Link href="/">
@@ -29,7 +25,7 @@ const Navbar = async () => {
             {/*<Link href="/admin" className="flex items-center gap-2"><RiAdminLine />Admin</Link>*/}
           </div>
           {/* Middle: Search Box */}
-          <div className="flex flex-grow justify-center items-center">
+          <div className="flex flex-grow justify-center items-center mt-4 sm:mt-0">
             <div className="relative">
               <input
                 type="text"
@@ -43,7 +39,7 @@ const Navbar = async () => {
             </div>
           </div>
           {/* Right side: Account and Cart Icons */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <Link href="/" className="flex items-center gap-2"><UserMenu currentUser={currentUser}/></Link>
             {/* ----------------------need to implement - when logged in write the name of user---------------------- */}
 
@@ -80,4 +76,3 @@ const Navbar = async () => {
 };
 
 export default Navbar;
-
