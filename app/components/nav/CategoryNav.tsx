@@ -3,8 +3,7 @@
 import Link from "next/link"; // Importing Link component from Next.js
 import Container from "../Container";
 import CategoryNavItem from "./CategoryNavItem";
-import { usePathname, useRouter } from "next/navigation"; // Importing usePathname and useRouter hooks from Next.js
-import Button from "../Button";
+import { usePathname } from "next/navigation"; // Importing usePathname and useRouter hooks from Next.js
 import { MdStorefront } from "react-icons/md";
 import { HiPaintBrush } from "react-icons/hi2";
 import { TbPhoto } from "react-icons/tb";

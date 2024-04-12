@@ -16,14 +16,20 @@ const Navbar = async () => {
       <Container>
         <div className="text-lg text-white flex flex-col sm:flex-row justify-between items-center py-4 relative">
           {/* Left side: Logo and Navigation Links */}
+          
           <div className="flex items-center gap-4">
-            <Link href="/">
-              <img src={logo.src} alt="" className="h-8" />
-            </Link>
+            
+
             {/* Navigation Links */}
-            <Link href="/" className="flex items-center gap-2"><CiHome />Home</Link>
-            {/*<Link href="/admin" className="flex items-center gap-2"><RiAdminLine />Admin</Link>*/}
+            <Link href="/" className="flex items-center gap-2">
+              {/* Logo */}
+              <img src={logo.src} alt="Home" className="h-8" />
+              {/* Home text */}
+              <span className="ml-2">Home</span>
+            </Link>
+
           </div>
+
           {/* Middle: Search Box */}
           <div className="flex flex-grow justify-center items-center mt-4 sm:mt-0">
             <div className="relative">
