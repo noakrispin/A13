@@ -1,4 +1,4 @@
-export const revalidate=0; 
+import React from 'react';
 import Container from "@/app/components/Container";
 import ProductDetails from "./ProductDetails";
 import { products } from "@/Utils/products";
@@ -14,7 +14,7 @@ const Product = ({ params }: { params: IParams }) => {
     const product = params.productId ? products.find(item => item.id === params.productId) : undefined;
 
     return (
-        <div className="p-8">
+        <div className="p-16"> {/* Adjusted padding */}
             <Container>
                  {/* Render ProductDetails if product is found, otherwise show a message */}
                  {product ? (
