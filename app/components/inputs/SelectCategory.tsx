@@ -4,27 +4,27 @@ import { useCallback, useEffect, useState } from "react";
 import SelectImage from "./SelectImage";
 import Button from "../Button";
 
-// Define props interface for SelectColor component
-interface SelectColorProps {
-  item: ImageType; // Color item object
+// Define props interface for SelectCategory component
+interface SelectCategoryProps {
+  item: ImageType; // category item object
   addImageToState: (value: ImageType) => void; // Function to add image to state
   removeImageFromState: (value: ImageType) => void; // Function to remove image from state
   isProductCreated: boolean; // Boolean indicating if product is created
 }
 
-// Define SelectColor component
-const SelectColor: React.FC<SelectColorProps> = ({
+// Define SelectCategory component
+const SelectCategory: React.FC<SelectCategoryProps> = ({
   item,
   addImageToState,
   removeImageFromState,
   isProductCreated,
 }) => {
-  // State to track if color is selected
+  // State to track if category is selected
   const [isSelected, setIsSelected] = useState(false);
   // State to track selected file
   const [file, setFile] = useState<File | null>(null);
 
-  // Reset selected color and file when product is created
+  // Reset selected category and file when product is created
   useEffect(() => {
     if (isProductCreated) {
       setIsSelected(false);
@@ -48,11 +48,11 @@ const SelectColor: React.FC<SelectColorProps> = ({
     }
   }, [removeImageFromState, item]); //
 
-  // Render SelectColor component
+  // Render SelectCategory component
   return (
     <div className="grid grid-cols-1 overflow-y-auto border-b-[1.2px] border-slate-200 items-center p-2">
       <div className="flex flex-row gap-2 items-center h-[60px]">
-        {/* Checkbox for selecting color */}
+        {/* Checkbox for selecting category */}
         <input
           id={item.color}
           type="checkbox"
@@ -67,7 +67,7 @@ const SelectColor: React.FC<SelectColorProps> = ({
       </div>
       {/* Conditional rendering based on selection */}
       <>
-        {/* Render SelectImage component if color is selected and no file is chosen */}
+        {/* Render SelectImage component if category is selected and no file is chosen */}
         {isSelected && !file && (
           <div className="col-span-2 text-center">
             <SelectImage item={item} handleFileChange={handleFileChange} />
@@ -96,4 +96,4 @@ const SelectColor: React.FC<SelectColorProps> = ({
   );
 };
 
-export default SelectColor; // Export SelectColor component
+export default SelectCategory; // Export SelectCategory component

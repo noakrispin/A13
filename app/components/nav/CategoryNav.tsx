@@ -3,12 +3,11 @@
 import Link from "next/link"; // Importing Link component from Next.js
 import Container from "../Container";
 import CategoryNavItem from "./CategoryNavItem";
-import { usePathname } from "next/navigation"; // Importing usePathname and useRouter hooks from Next.js
-import { MdStorefront } from "react-icons/md";
-import { HiPaintBrush } from "react-icons/hi2";
-import { TbPhoto } from "react-icons/tb";
-import { GiSpartanHelmet } from "react-icons/gi";
-import { RiNftFill } from "react-icons/ri";
+import { usePathname } from "next/navigation"; // Importing usePathname hook from Next.js
+import paintImg from "@/Utils/pool17.jpg";
+import photograpfImg from "@/Utils/photograph.jpg";
+import sculpImg from "@/Utils/sculp.jpg";
+import nftImg from "@/Utils/nft.jpg";
 
 // NavCategory component to render category navigation
 const NavCategory = () => {
@@ -16,48 +15,39 @@ const NavCategory = () => {
     const pathname = usePathname();
 
     return (
-        <div className="w-full shadow-sm top-20 border-b-[1px] pt-4">
+        <div className="w-full shadow-sm top-20 pt-4">
           <Container>
-            <div className="flex flex-row items-center justify-between md:justify-center gap-8 md:gap-12 overflow-x-auto flex-nowrap">
-              <Link href="/app">
-                <CategoryNavItem
-                  label="All"
-                  icon={MdStorefront}
-                  selected={pathname === "/app"}
-                />
-              </Link>
-              <Link href="/admin/add-products">
-                <CategoryNavItem
-                  label="Painting"
-                  icon={HiPaintBrush}
-                  selected={pathname === "/admin/add-products"}
-                />
-              </Link>
-              <Link href="/admin/manage-products">
-                <CategoryNavItem
-                  label="Photography"
-                  icon={TbPhoto}
-                  selected={pathname === "/admin/manage-products"}
-                />
-              </Link>
-              <Link href="/admin/manage-orders">
-                <CategoryNavItem
-                  label="Sculpture"
-                  icon={GiSpartanHelmet}
-                  selected={pathname === "/admin/manage-orders"}
-                />
-              </Link>
-              <Link href="/admin/manage-orders">
-                <CategoryNavItem
-                  label="Nft"
-                  icon={RiNftFill}
-                  selected={pathname === "/admin/manage-orders"}
-                />
-              </Link>
+            <div className="flex justify-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <Link href="/admin/add-products">
+                        <CategoryNavItem
+                            label="Painting"
+                            imageUrl={paintImg.src}
+                        />
+                    </Link>
+                    <Link href="/admin/manage-products">
+                        <CategoryNavItem
+                            label="Photography"
+                            imageUrl={photograpfImg.src}
+                        />
+                    </Link>
+                    <Link href="/product/nft">
+                        <CategoryNavItem
+                            label="Sculpture"
+                            imageUrl={sculpImg.src}
+                        />
+                    </Link>
+                    <Link href="/product/nft">
+                        <CategoryNavItem
+                            label="NFT"
+                            imageUrl={nftImg.src}
+                        />
+                    </Link>
+                </div>
             </div>
           </Container>
         </div>
-      );
+    );
 };
 
 export default NavCategory;

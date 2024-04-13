@@ -6,7 +6,7 @@ import Heading from "@/app/components/Heading";
 import CategoryInput from "@/app/components/inputs/CategoryInput";
 import CustomCheckBox from "@/app/components/inputs/CustomCheckBox";
 import Input from "@/app/components/inputs/Input";
-import SelectColor from "@/app/components/inputs/SelectColor";
+import SelectColor from "@/app/components/inputs/SelectCategory";
 import TextArea from "@/app/components/inputs/TextArea";
 import firebaseApp from "@/libs/firebase";
 import { categories } from "@/Utils/categories";
