@@ -6,7 +6,6 @@ import Heading from "@/app/components/Heading";
 import CategoryInput from "@/app/components/inputs/CategoryInput";
 import CustomCheckBox from "@/app/components/inputs/CustomCheckBox";
 import Input from "@/app/components/inputs/Input";
-import SelectColor from "@/app/components/inputs/SelectCategory";
 import TextArea from "@/app/components/inputs/TextArea";
 import firebaseApp from "@/libs/firebase";
 import { categories } from "@/Utils/categories";
@@ -17,6 +16,7 @@ import { getDownloadURL, getStorage, ref,uploadBytesResumable} from "firebase/st
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { colors } from "@/Utils/Colors";
+import SelectCategory from "@/app/components/inputs/SelectCategory";
 
 
 // Define types for image and uploaded image
@@ -62,6 +62,7 @@ const AddProductForm = () => {
       price: "",
     },
   });
+
   // useEffect hook to reset form and images state when product is created
   useEffect(() => {setCustomValue("images", images);    
   }, [images]);
@@ -72,7 +73,7 @@ const AddProductForm = () => {
       setImages(null);
       setIsProductCreated(false);
     }
-  }, [isProductCreated,reset]); //reset
+  }, [isProductCreated]); //reset
 
   // Function to handle form submission
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -108,8 +109,7 @@ const AddProductForm = () => {
               uploadTask.on(
                 "state_changed",
                 (snapshot) => {
-                  const progress =
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  const progress =(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                   console.log("Upload is " + progress + "% done");
                   switch (snapshot.state) {
                     case "paused":
@@ -125,8 +125,7 @@ const AddProductForm = () => {
                   reject(error);
                 },
                 () => {
-                  getDownloadURL(uploadTask.snapshot.ref)
-                    .then((downloadURL) => {
+                  getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                       // Add uploaded image data to uploadedImages array
                       uploadedImages.push({
                         ...item,
@@ -157,8 +156,7 @@ const AddProductForm = () => {
 
     // Send product data to backend API for saving to MongoDB
     axios
-      .post("/api/product", productData)
-      .then(() => {
+      .post("/api/product", productData).then(() => {
         toast.success("Product created");
         setIsProductCreated(true);
         router.refresh();
@@ -201,7 +199,7 @@ const AddProductForm = () => {
     setImages((prev) => {
       if (prev) {
         const filteredImages = prev.filter(
-          (item) => item.color !== value.color
+          (item) => item.color != value.color
         );
         return filteredImages;
       }
@@ -299,7 +297,7 @@ const AddProductForm = () => {
           {/* Render SelectColor component for each color */}
           {colors.map((item, index) => {
             return (
-              <SelectColor
+              <SelectCategory
                 key={index}
                 item={item}
                 addImageToState={addImageToState}

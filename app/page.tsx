@@ -68,13 +68,13 @@ export default async function Home({searchParams}: HomeProps) {
           <NavCategory/>
         </div> 
 
-        <div className="text-white text-2xl border-b-[1px] border-violet-500 py-3 flex justify-between gap-4"> 
+        <div className="text-2xl border-b-[1px] border-violet-500 py-3 flex justify-between gap-4"> 
           Best of 2024 
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 mt-6">
           {shuffledProducts.map((product: any) => (
-            <ProductsCard key={product.id} data={product} />
+            <ProductsCard data={product} />
           ))}
         </div>
 
