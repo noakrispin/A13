@@ -1,4 +1,4 @@
-/*"use client";
+"use client";
 export const revalidate=0; 
 
 // Import necessary dependencies
@@ -11,7 +11,7 @@ import { Product } from "@prisma/client";
 // Define the CategoryPage functional component
 const NftPage: React.FC = () => {
   
-  const { category } = useParams<{ category: string }>();// Retrieve the category from the URL
+/*  const { category } = useParams<{ category: string }>();// Retrieve the category from the URL
   const [products, setProducts] = useState<Product[]>([]); // State to hold fetched products
 
   // Function to fetch products based on the current category
@@ -43,7 +43,10 @@ const NftPage: React.FC = () => {
         ))}
       </div>
     </div>
-  );
+  );*/
+  return(
+    <div>NFT</div>
+  )
 };
 
-export default NftPage; // Export the component*/
+export default NftPage; // Export the component
