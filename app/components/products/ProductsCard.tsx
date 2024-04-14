@@ -46,10 +46,11 @@ const ProductsCard: React.FC<productsCardProps> = ({ data }) => {
                     items-center"
                 >
                     <Image
-                        fill
-                        src={data.images[0].image}
-                        alt={data.name}
-                        className="w-full h-full object-contain"
+                    src={data.images?.[0]?.image} // Change 'fill' to 'src'
+                    alt={data.name}
+                    layout="fill" // Add layout="fill" to stretch the image within its container
+                    objectFit="cover" // Add objectFit="cover" to ensure the image covers the container
+                    className="w-full h-full object-cover" // Replace 'object-contain' with 'object-cover'
                     />
                 </div>
                 <div className="mt-4">

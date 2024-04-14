@@ -1,5 +1,5 @@
 import prisma from '@/libs/prismadb'
-/*
+
 interface IParams{
     productId?: string
 }
@@ -18,7 +18,7 @@ export default async function getProductById(params: IParams){
                         user: true
                     },
                     orderBy:{
-                        createdDate: 'desc'
+                        createDate: 'desc'
                     }
                 }
             }
@@ -31,4 +31,4 @@ export default async function getProductById(params: IParams){
     } catch (error: any) {
         throw new Error(error)
     }
-}*/
+}

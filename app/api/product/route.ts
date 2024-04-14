@@ -8,8 +8,11 @@ export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
 
   // If no current user or current user is not an admin, return an error response
-  if(!currentUser || currentUser.role != 'ADMIN'){
-    return NextResponse.error();
+
+  if(!currentUser) return  NextResponse.error();
+
+  if(currentUser.role =='ADMIN'){
+      return NextResponse.error();
   }
 
   // Parse request body

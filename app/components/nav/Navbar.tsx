@@ -5,6 +5,7 @@ import logo from "./public/logo.png";
 import CartCount from "./CartCount";
 import UserMenu from "./UserMenu";
 import getCurrentUser from "@/actions/getCurrentUser";
+import SerchInput from "./SerchInput";
 
 const Navbar = async () => {
 

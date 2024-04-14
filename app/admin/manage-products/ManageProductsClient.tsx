@@ -123,7 +123,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
    // Function to handle toggling product stock status
   const handleToggleStock = useCallback((id: string, inStock: boolean) => {
     axios
-      .put("/api/product", {
+      .put(`/api/product/${id}`, { ////
         id,
         inStock: !inStock,
       })

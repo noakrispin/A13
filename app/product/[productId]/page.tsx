@@ -4,17 +4,20 @@ import React from 'react';
 import Container from "@/app/components/Container";
 import ProductDetails from "./ProductDetails";
 import { products } from "@/Utils/products";
+import getProductById from '@/actions/getProductById';
+import NullData from '@/app/components/NullData';
 
 interface IParams {
     productId?: string;
 };
 
-const Product = ({ params }: { params: IParams }) => {
-    console.log('params', params);
+const Product = async ({ params }: { params: IParams }) => {
 
-    // Find the product by ID
-    const product = params.productId ? products.find(item => item.id === params.productId) : undefined;
+    const product = await getProductById(params)
 
+    if(!product){
+        return <NullData title='Oops! Product with the given id does not exist'/>
+    }
     return (
         <div className="p-16"> {/* Adjusted padding */}
             <Container>
