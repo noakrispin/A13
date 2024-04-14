@@ -51,7 +51,7 @@ model Product{
   Artist_Name String
   Size String
   category String
-  Image Image[]
+  images Image[]
   inStock Boolean
   price Float
   reviews Review[]

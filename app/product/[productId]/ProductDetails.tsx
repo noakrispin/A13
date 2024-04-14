@@ -46,7 +46,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         Artist_Name: product.Artist_Name,
         Size: product.Size,
         category: product.category,
-        selectedImg: { ...product.images[0] },
+        selectedImg: product.images && product.images.length > 0 ? { ...product.images[0] } : null,
         quantity: 1,
         price: product.price
     });

@@ -4,10 +4,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-body{
+body {
+  color: white; /* Set default text color to white */
+  background-color: #0A090B; /* Set default background color to black */
   /* font-family: 'Inter', sans-serif; */
-  background-color: #0A090B;
 }
+
+/* Change text color to black when background color is white */
+body.white-background {
+  color: black;
+}
+
 .red-heart {
   color: red; 
 }

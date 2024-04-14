@@ -1,6 +1,8 @@
+'use client'
+
 // Import necessary types and hooks
 import { ImageType } from "@/app/admin/add-products/AddProductForm";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 // Define props interface for SelectImage component
@@ -11,6 +13,7 @@ interface SelectImageProps {
 
 // Define SelectImage component
 const SelectImage: React.FC<SelectImageProps> = ({item,handleFileChange}) => {
+  
   // Callback function for handling file drop
   const onDrop = useCallback((acceptedFiles: File[]) => {
     // If files are accepted, call handleFileChange with the first accepted file
@@ -20,8 +23,7 @@ const SelectImage: React.FC<SelectImageProps> = ({item,handleFileChange}) => {
   }, [handleFileChange]);
 
   // useDropzone hook to handle file drop
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop, // Callback function for file drop
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, // Callback function for file drop
     accept: { "image/*": [".jpeg", ".png"] }, // Accept only image files with .jpeg and .png extensions
   });
 
@@ -33,7 +35,7 @@ const SelectImage: React.FC<SelectImageProps> = ({item,handleFileChange}) => {
     >
       <input {...getInputProps()} /> {/* Props for the input element */}
       {/* Render text for indicating drop area */}
-      <p>Drop the image here...</p>
+      {isDragActive ? (<p>Drop the image here...</p>) : (<p>{item?.color} Image</p>)} 
     </div>
   );
 };

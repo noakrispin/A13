@@ -39,7 +39,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
         category: product.category,
         artistName: product.Artist_Name,
         inStock: product.inStock,
-        image: product.Image,
+        image: product.images,
       };
     });
   }
@@ -123,7 +123,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
    // Function to handle toggling product stock status
   const handleToggleStock = useCallback((id: string, inStock: boolean) => {
     axios
-      .put("/api/product", {
+      .put(`/api/product/${id}`, { ////
         id,
         inStock: !inStock,
       })

@@ -23,6 +23,7 @@ const ProductsCard: React.FC<productsCardProps> = ({ data }) => {
             cursor-pointer 
             border-slate-200 
             bg-white  
+            text-black
             rounded-sm 
             p-2 
             transition hover:scale-105 
@@ -47,7 +48,7 @@ const ProductsCard: React.FC<productsCardProps> = ({ data }) => {
                 >
                     <Image
                         fill
-                        src={data.images[0].image}
+                        src={(data.images ?? [])[0]?.image} // Using nullish coalescing operator (??)
                         alt={data.name}
                         className="w-full h-full object-contain"
                     />
