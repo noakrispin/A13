@@ -1,3 +1,5 @@
+export const revalidate=0; 
+
 import getProducts from "@/actions/getProducts";
 import Summary from "./Summary";
 import getOrders from "@/actions/getOrders";
@@ -6,7 +8,7 @@ import Container from "../components/Container";
 import BarGraph from "./BarGraph";
 import getGraphData from "@/actions/getGraphData";
 
-export const revalidate=0; 
+
 
 const Admin = async () => {
   const products = await getProducts({category: null})

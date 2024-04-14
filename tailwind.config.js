@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -7,11 +6,18 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors:{
-        "Purple": "#f5f2ff",
-        "primaryBG": "#0a090b"
+      colors: {
+        dark: {
+          "primaryBG": "#0a090b", // Dark mode background color
+          // Define other dark mode colors here
+        },
+        light: {
+          "primaryBG": "#ffffff", // Light mode background color
+          // Define other light mode colors here
+        },
+        "Purple": "#f5f2ff", // Common color
       },
-      fontFamily:{
+      fontFamily: {
         'primary': ['Inter', 'sans-serif'],
       },
       backgroundImage: {
@@ -19,8 +25,10 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      borderWidth: {
+        'border': '1px', // Define the border-border class with a border width of 1px
+      },
     },
   },
   plugins: [],
 }
-
