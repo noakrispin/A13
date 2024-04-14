@@ -1,4 +1,6 @@
 export const revalidate=0; 
+
+import { useTheme } from 'next-themes'; // Import useTheme hook
 import { products } from "@/Utils/products";
 import HomeBanner from "./components/HomeBanner";
 import Container from "./components/Container";
@@ -33,6 +35,7 @@ async function run() {
 run().catch(console.dir);
 
 export default function Home() {
+  
   return (
     <div className="p-8">
       <Container>

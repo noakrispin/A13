@@ -1,3 +1,5 @@
+export const revalidate=0; 
+
 import React from 'react';
 import Container from "@/app/components/Container";
 import ProductDetails from "./ProductDetails";
