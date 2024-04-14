@@ -23,6 +23,7 @@ const ProductsCard: React.FC<productsCardProps> = ({ data }) => {
             cursor-pointer 
             border-slate-200 
             bg-white  
+            text-black
             rounded-sm 
             p-2 
             transition hover:scale-105 
@@ -46,11 +47,10 @@ const ProductsCard: React.FC<productsCardProps> = ({ data }) => {
                     items-center"
                 >
                     <Image
-                    src={data.images?.[0]?.image} // Change 'fill' to 'src'
-                    alt={data.name}
-                    layout="fill" // Add layout="fill" to stretch the image within its container
-                    objectFit="cover" // Add objectFit="cover" to ensure the image covers the container
-                    className="w-full h-full object-cover" // Replace 'object-contain' with 'object-cover'
+                        fill
+                        src={(data.images ?? [])[0]?.image} // Using nullish coalescing operator (??)
+                        alt={data.name}
+                        className="w-full h-full object-contain"
                     />
                 </div>
                 <div className="mt-4">

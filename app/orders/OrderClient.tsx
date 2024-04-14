@@ -121,37 +121,6 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
         },
     ];
 
-    const handleDispatch = useCallback((id: any) => {
-        axios
-            .put("/api/order", {
-                id,
-                deliveryStatus: "dispatched",
-            })
-            .then(() => {
-                toast.success("Order Dispatched");
-                router.refresh();
-            })
-            .catch((err) => {
-                toast.error("Oops! Something went wrong");
-                console.error(err);
-            });
-    }, [router]);
-
-    const handleDeliver = useCallback((id: any) => {
-        axios
-            .put("/api/order", {
-                id,
-                deliveryStatus: "delivered",
-            })
-            .then(() => {
-                toast.success("Order Delivered");
-                router.refresh();
-            })
-            .catch((err) => {
-                toast.error("Oops! Something went wrong");
-                console.error(err);
-            });
-    }, [router]);
 
     const CustomWhiteCheckbox = (props: JSX.IntrinsicAttributes & CheckboxProps) => (
         <Checkbox

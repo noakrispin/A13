@@ -8,16 +8,13 @@ export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
 
   // If no current user or current user is not an admin, return an error response
-
-  if(!currentUser) return  NextResponse.error();
-
-  if(currentUser.role =='ADMIN'){
-      return NextResponse.error();
+  if(!currentUser || currentUser.role != 'ADMIN'){
+    return NextResponse.error();
   }
 
   // Parse request body
   const body = await request.json();
-  const { name, description, Size, price, Artist_Name, category, inStock, Image } = body;
+  const { name, description, Size, price, Artist_Name, category, inStock, images } = body;
 
   // Create a new product using Prisma
   const product = await prisma.product.create({
@@ -29,7 +26,7 @@ export async function POST(request: Request) {
       Artist_Name,
       category,
       inStock,
-      Image,
+      images,
     },
   });
 

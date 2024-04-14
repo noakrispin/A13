@@ -13,7 +13,7 @@ interface IParams {
 
 const Product = async ({ params }: { params: IParams }) => {
 
-    const product = await getProductById(params)
+    const product = await getProductById(params);
 
     if(!product){
         return <NullData title='Oops! Product with the given id does not exist'/>
