@@ -34,6 +34,7 @@ export type UploadedImageType = {
 
 // Define AddProductForm component
 const AddProductForm = () => {
+  
   // State variables
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -208,6 +209,7 @@ const AddProductForm = () => {
       return prev;
     });
   }, [setImages]);
+
 
   // Render form components
   return (

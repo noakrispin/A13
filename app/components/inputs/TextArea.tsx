@@ -31,6 +31,7 @@ const TextArea: React.FC<TextAreaProps> = ({id,label,disabled,required,register,
         min-h-[150px]
         outline-none
         bg-white
+        text-black
         font-light
         border-2
         rounded-md
