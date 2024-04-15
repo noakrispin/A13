@@ -35,7 +35,8 @@ const SelectImage: React.FC<SelectImageProps> = ({item,handleFileChange}) => {
     >
       <input {...getInputProps()} /> {/* Props for the input element */}
       {/* Render text for indicating drop area */}
-      {isDragActive ? (<p>Drop the image here...</p>) : (<p>{item?.color} Image</p>)} 
+      {isDragActive ? (<p>Drop the image here...</p>) : (<p>{item?.color} Image</p>)} {/** */}
+      
     </div>
   );
 };

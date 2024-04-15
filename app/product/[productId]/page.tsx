@@ -18,6 +18,7 @@ const Product = async ({ params }: { params: IParams }) => {
     if(!product){
         return <NullData title='Oops! Product with the given id does not exist'/>
     }
+    
     return (
         <div className="p-16"> {/* Adjusted padding */}
             <Container>

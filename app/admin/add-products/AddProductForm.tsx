@@ -266,7 +266,7 @@ const AddProductForm = () => {
         <div className="mb-2 font-semibold text-white">Select a Category</div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h[50vh] overflow-y-auto text-white">
             {categories.map((item) => {
-              if (item.label === "All") {
+              if (item.label === 'All') {
                 return null;
               }
 
@@ -303,6 +303,8 @@ const AddProductForm = () => {
                 addImageToState={addImageToState}
                 removeImageFromState={removeImageFromState}
                 isProductCreated={isProductCreated}
+                
+                
               />
             );
           })}
