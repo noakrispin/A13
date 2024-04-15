@@ -13,7 +13,7 @@ export default async function getProducts(params: IProductParams) {
     // Destructure category and searchTerm from params object
     const { category, searchTerm } = params;
     // Initialize searchString with searchTerm or empty string if not provided
-    let searchString = searchTerm;
+    let searchString = searchTerm || '';
 
     if (!searchTerm) {
       searchString = "";

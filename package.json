@@ -30,6 +30,7 @@
     "chart.js": "^4.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "cors": "^2.8.5",
     "eslint": "8.57.0",
     "eslint-config-next": "14.1.0",
     "firebase": "^10.6.0",

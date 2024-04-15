@@ -8,8 +8,9 @@ import ProductsCard from "./components/products/ProductsCard";
 import NavCategory from "./components/nav/CategoryNav";
 import getProducts, { IProductParams } from '@/actions/getProducts';
 import NullData from './components/NullData';
+import Categories from './components/nav/Categories';
 
-
+/*
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://pazfayer:23N3mw1XOtbtl3Ld@cluster0.uxbsomu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -35,7 +36,7 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
+*/
 interface HomeProps{
   searchParams: IProductParams
 }
@@ -47,6 +48,7 @@ export default async function Home({searchParams}: HomeProps) {
     return <NullData title='Oops! No products found. Click "All" to clear filters' />
   }
 
+  /*
   function shuffleArray(array: any){
     for(let i=array.length-1; i>0 ;i--){
       const j=Math.floor(Math.random()*(i+1));
@@ -56,25 +58,25 @@ export default async function Home({searchParams}: HomeProps) {
   }
 
   const shuffledProducts = shuffleArray(products)
-  
+  */
   return (
     <div className="p-8">
       <Container>
         <div>
           <HomeBanner/>
         </div>
-        {/*Button for category */}
+        {/*Button for category 
         <div>
           <NavCategory/>
-        </div> 
-
-        <div className="text-2xl border-b-[1px] border-violet-500 py-3 flex justify-between gap-4"> 
-          Best of 2024 
+        </div> */}
+        <div>
+        <Categories/>
         </div>
 
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 mt-6">
-          {shuffledProducts.map((product: any) => (
-            <ProductsCard key={product.id} data={product} />
+          {products.map((product: any) => (
+            <ProductsCard  data={product} />
           ))}
         </div>
 
