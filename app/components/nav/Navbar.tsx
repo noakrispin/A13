@@ -1,11 +1,11 @@
+
 import Link from "next/link";
 import Container from "../Container";
-import { CiHome, CiSearch } from "react-icons/ci";
 import logo from "./public/logo.png";
 import CartCount from "./CartCount";
 import UserMenu from "./UserMenu";
 import getCurrentUser from "@/actions/getCurrentUser";
-import SerchInput from "./SerchInput";
+import SearchInput from "./SearchInput";
 
 const Navbar = async () => {
 
@@ -30,21 +30,24 @@ const Navbar = async () => {
             </Link>
 
           </div>
-
-          {/* Middle: Search Box */}
+          {/*className="hidden md:block" */}
+          <div > 
+            <SearchInput/>
+          </div>
+          {/* Middle: Search Box 
           <div className="flex flex-grow justify-center items-center mt-4 sm:mt-0">
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search..."
                 className="block min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-2 py-1"
-              />
-              {/* Search Button */}
+              />*/}
+              {/* Search Button 
               <div className="absolute right-1 top-0 h-full flex items-center">
                 <Link href="/" className='flex items-center gap-2'><CiSearch className="h-4 w-4" /></Link>
               </div>
             </div>
-          </div>
+          </div>*/}
           {/* Right side: Account and Cart Icons */}
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <Link href="/" className="flex items-center gap-2"><UserMenu currentUser={currentUser}/></Link>
@@ -78,7 +81,9 @@ const Navbar = async () => {
           </div>
         </div>
       </Container>
+      
     </div>
+ 
   );
 };
 
