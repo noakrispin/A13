@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { useCallback } from 'react';
+import { useCallback,Suspense  } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import queryString from 'query-string';
 

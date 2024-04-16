@@ -5,8 +5,12 @@ import { categories } from '@/Utils/categories';
 import Category from './Category';
 import { usePathname, useSearchParams } from 'next/navigation';
 
+// Import the useSuspenseFallback function
+import { useSuspenseFallback } from '@/Utils/useSuspenseFallback';
+
 const Categories = () => {
-    const params = useSearchParams();
+    // Wrap useSearchParams() in useSuspenseFallback
+    const params = useSuspenseFallback(Promise.resolve(useSearchParams()));
     const category = params?.get('category');
     const pathname = usePathname();
 
@@ -26,7 +30,6 @@ const Categories = () => {
                             label={item.label}
                             Icon={item.icon}
                             selected={category === item.label || (category == null && item.label === 'All')}
-                            // Ensure no accidental 'dataSlot' prop passed here
                         />
                     ))}
                 </div>
