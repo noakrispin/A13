@@ -41,7 +41,6 @@ const Navbar = async () => {
               <CartCount/>
               {/* Badge */}
             </div>
-            <ThemeBtn/>
           </div>
         </div>
       </Container>
