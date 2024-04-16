@@ -7,6 +7,7 @@ import UserMenu from "./UserMenu";
 import getCurrentUser from "@/actions/getCurrentUser";
 import SearchInput from "./SearchInput";
 import Categories from "./Categories";
+import ThemeBtn from "../ThemeBtn";
 
 const Navbar = async () => {
 
@@ -40,12 +41,11 @@ const Navbar = async () => {
               <CartCount/>
               {/* Badge */}
             </div>
+            <ThemeBtn/>
           </div>
         </div>
       </Container>
-      <div>
-          <Categories/>
-        </div>  
+      <Categories/> 
     </div>
  
   );

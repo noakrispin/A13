@@ -4,16 +4,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+/* styles.css */
 body {
-  color: white; /* Set default text color to white */
-  background-color: #0A090B; /* Set default background color to black */
-  /* font-family: 'Inter', sans-serif; */
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-/* Change text color to black when background color is white */
-body.white-background {
-  color: black;
+.dark {
+  --bg-color: #0e0e0e;
+  --text-color: #fff;
 }
+
+.light {
+  --bg-color: #fff;
+  --text-color: #333;
+}
+
 
 .red-heart {
   color: red; 
