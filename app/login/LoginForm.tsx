@@ -77,7 +77,7 @@ const LoginForm: React.FC<LoginFormProps> = ({currentUser}) => {
             <Heading title="Sign in to Frame of Fame"/>
             <Button
             outline
-            label="Continu with Google"
+            label="Continue with Google"
             icon={AiOutlineGoogle}
             onClick={() => {signIn('google')}}
             ></Button>
