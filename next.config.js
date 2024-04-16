@@ -7,7 +7,7 @@ const nextConfig = {
             { protocol: 'http', hostname: 'localhost' },
             { protocol: 'http', hostname: 'cdn.example.com' },
             { protocol: 'https', hostname: 'firebasestorage.googleapis.com' },
-            { protocol: 'https', hostname: 'googleusercontent.com' }
+            //{ protocol: 'https', hostname: 'googleusercontent.com' }
         ]
     }, 
     
