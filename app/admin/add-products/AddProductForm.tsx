@@ -263,8 +263,8 @@ const AddProductForm = () => {
       />
       {/* Category selection */}
       <div className="w-full font-medium">
-        <div className="mb-2 font-semibold text-white">Select a Category</div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h[50vh] overflow-y-auto text-white">
+        <div className="mb-2 font-semibold">Select a Category</div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-h[50vh] overflow-y-auto ">
             {categories.map((item) => {
               if (item.label === 'All') {
                 return null;
@@ -286,14 +286,14 @@ const AddProductForm = () => {
       {/* Image upload section */}
       <div className="w-full flex flex-col flex-wrap gap-4">
         <div>
-          <div className="font-bold text-white">
+          <div className="font-bold ">
             Upload image of your artwork.
           </div>
-          <div className="text-sm  text-white">
+          <div className="text-sm  ">
             First, you must commit that the creation is yours alone in order to avoid copyright infringement.
           </div>
         </div>
-        <div className="text-white gap-3">
+        <div className=" gap-3">
           {/* Render SelectColor component for each color */}
           {colors.map((item, index) => {
             return (

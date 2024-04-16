@@ -1,7 +1,7 @@
 const HomeBanner = () => {
   return (
-    <div className="pt-10 xl:px-20 px-4 relative">
-      <div className="mx-auto px-2 py-0 flex flex-col md:flex-row gap-2 justify-left items-start">
+    <div className="pt-10 xl:px-20 px-4 relative z-0"> 
+      <div className="mx-auto px-2 py-0 flex flex-col md:flex-row gap-2 justify-left items-start relative">
         {/* Text Content */}
         <div className="md:w-1/2 text-purple-200 z-10 relative">
           <h1 className="text-5xl font-bold mb-5 font-primary">Original art to buy online</h1>

@@ -40,6 +40,7 @@ const Button: React.FC <ButtonProps> = ({
     gap-2
     ${outline ? "border-solid border-2 border-indigo-600 ": "bg-violet-500" }
     ${outline ? "text-violet-500": "text-white" }
+    ${outline ? "text-violet-200": "text-black" }
     ${small ? "text-sm font-light": "text-md [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-black " }
     ${small ? "py-1 px-2 border[1px]": "py-3 px-4 border[2px]" }
     ${custom ? custom :''}

@@ -66,7 +66,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({clientSecret,handleSetPaymen
             <div className="mb-6">
                 <Heading title="Enter your details to complete checkout" />
             </div>
-            <h2 className="font-semibold mb-2 text-white">
+            <h2 className="font-semibold mb-2 ">
                 Address Information
             </h2>
             <AddressElement 
@@ -75,9 +75,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({clientSecret,handleSetPaymen
                     allowedCountries: ['Israel', 'USA'],
                 }}
             />
-            <h2 className="font-semibold mt-4 mb-2 text-white">Payment Information</h2>
+            <h2 className="font-semibold mt-4 mb-2">Payment Information</h2>
             <PaymentElement id='payment-element' options={{layout: 'tabs'}}/>
-            <div className="py-4 text-center text-2xl font-bold text-white">
+            <div className="py-4 text-center text-2xl font-bold ">
                 Total: {formattedPrice}
             </div>
             <Button label={isLoading ? 'Processing' : 'Pay now'} 
