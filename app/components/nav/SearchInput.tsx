@@ -22,7 +22,6 @@ const SearchInput = () => {
   
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data); // Log the data object
     if (!data.searchTerm) {
       return router.push('/');
     }
@@ -32,7 +31,7 @@ const SearchInput = () => {
       query: {
         searchTerm: data.searchTerm
       }
-    }, { skipNull: true });
+    },{ skipNull: true });
   
     router.push(url);
     reset();

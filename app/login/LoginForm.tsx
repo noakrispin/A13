@@ -67,7 +67,7 @@ const LoginForm: React.FC<LoginFormProps> = ({currentUser}) => {
     };
     
     if(currentUser){
-        return <p className="text-center text-white">Logged in. Redirecting...</p>
+        return <p className="text-center ">Logged in. Redirecting...</p>
     }
     
     
@@ -103,7 +103,7 @@ const LoginForm: React.FC<LoginFormProps> = ({currentUser}) => {
             <Button label={isLoading ? "Loading" : 'Login'} 
             onClick={handleSubmit(onSubmit)}
             />
-            <p className="text-sm text-white">
+            <p className="text-sm ">
                 Do not have an account? 
                 <Link className="underline" 
                 href='/register'>

@@ -42,7 +42,6 @@ const UserMenu: React.FC<UserMenuProps>=({currentUser}) => {
             hover:shadow-md
             hover:shadow-white
             transition
-            text-white
             ">
                 <Avatar/>
                 <AiFillCaretDown />

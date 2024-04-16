@@ -135,8 +135,8 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
     );
 
     return (
-        <div className="max-w-[1150px] m-auto text-xl text-white">
-            <div className="mb-4 mt-8 text-white">
+        <div className="max-w-[1150px] m-auto text-xl ">
+            <div className="mb-4 mt-8 ">
                 <Heading title="Manage Orders" center />
             </div>
             <div style={{ height: 600, width: "100%"}}>
