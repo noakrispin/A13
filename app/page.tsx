@@ -1,10 +1,8 @@
 export const revalidate=0; 
 
-import { useTheme } from 'next-themes'; // Import useTheme hook
 import HomeBanner from "./components/HomeBanner";
 import Container from "./components/Container";
 import ProductsCard from "./components/products/ProductsCard";
-import NavCategory from "./components/nav/CategoryNav";
 import getProducts, { IProductParams } from '@/actions/getProducts';
 import NullData from './components/NullData';
 
