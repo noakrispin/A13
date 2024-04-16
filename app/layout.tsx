@@ -25,7 +25,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body >
+      <body className='dark'>
         <Toaster toastOptions={{
           style: {
             background: 'rgb(51 65 85)',
