@@ -74,7 +74,7 @@ const RegisterFrom: React.FC<RegisterFromProps> = ({currentUser}) => {
     };
 
     if(currentUser){
-        return <p className="text-center text-white">Logged in. Redirecting...</p>
+        return <p className="text-center">Logged in. Redirecting...</p>
     }
 
     return (
@@ -116,7 +116,7 @@ const RegisterFrom: React.FC<RegisterFromProps> = ({currentUser}) => {
             />
             <Button label={isLoading ? "Loading" : 'Sign Up'} onClick={handleSubmit(onSubmit)}
             />
-            <p className="text-sm text-white">
+            <p className="text-sm">
                 Already have an account? 
                 <Link className="underline" 
                 href='/login'>

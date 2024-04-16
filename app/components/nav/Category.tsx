@@ -48,12 +48,12 @@ const Category: React.FC<CategoryProps> = ({label,Icon:Icon,selected}) => {
 
     return (
     <div onClick={handleClick} className={`flex items-center 
-    justify-center text-center gap-1 p-2 border-2 
+    justify-center text-center gap-1 p-2 border-b-2 
     hover: text-violet-500 transition cursor-pointer
-    ${selected ? 'border-b-violet-500 text-violet-500' : 'border-transparent text-violet-200'}
+    ${selected ? 'border-b-violet-500 text-violet-500 pointer-events-auto' : 'border-transparent text-violet-200'}
     `}>
         <Icon size={20}/>
-        <div  className='font-medium text-sm'>{label}</div>
+        <div className='font-medium text-sm'>{label}</div>
     </div>
   )
 }

@@ -23,7 +23,7 @@ const CartClient: React.FC<CartClientProps> = ({currentUser}) => {
     // If the cart is empty, render a message and a link to start shopping
     if (!cartProducts || cartProducts.length==0){
         return (
-        <div className="text-white flex flex-col items-center">
+        <div className=" flex flex-col items-center">
             <div className="text-2xl"> Your cart is empty</div>
             <div>
                 <Link href={'/'} className="
@@ -37,7 +37,7 @@ const CartClient: React.FC<CartClientProps> = ({currentUser}) => {
     }
     // If the cart is not empty, render the cart items and other cart details
   return (
-    <div className='text-white'>
+    <div>
         <Heading title="Shopping Cart" center/>
         <div className="
         grid

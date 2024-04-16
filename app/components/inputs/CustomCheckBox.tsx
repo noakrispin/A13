@@ -13,7 +13,7 @@ interface CustomCheckBoxProps {
 // Define CustomCheckBox component
 const CustomCheckBox: React.FC<CustomCheckBoxProps> = ({ id, label, disabled, register }) => {
   return (
-    <div className="w-full flex flex-row gap-2 items-center text-white">
+    <div className="w-full flex flex-row gap-2 items-center">
       {/* Render checkbox input */}
       <input
         type="checkbox"
