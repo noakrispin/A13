@@ -13,11 +13,14 @@ interface IParams {
 
 const Product = async ({ params }: { params: IParams }) => {
 
-    const product = await getProductById(params);
+    //const product = await getProductById(params);
+    const { productId } = params; // Extract productId from params
 
-    if(!product){
+    if(!productId){
         return <NullData title='Oops! Product with the given id does not exist'/>
     }
+
+    const product = await getProductById({ productId }); // Pass productId to getProductById
     
     return (
         <div className="p-16"> {/* Adjusted padding */}

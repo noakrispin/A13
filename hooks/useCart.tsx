@@ -113,7 +113,7 @@ export const CartContextProvider: React.FC<CartContextProviderProps> = ({ childr
             const existingIndex = cartProducts.findIndex((item) => item.id == product.id);
             if(existingIndex >-1){
                 updateCart[existingIndex].quantity= ++updateCart[existingIndex].quantity;
-
+                //updateCart[existingIndex].quantity = updateCart[existingIndex].quantity?. > 0 ? --updateCart[existingIndex].quantity : 0;
             }
 
             setcartProducts(updateCart);
@@ -145,16 +145,16 @@ export const CartContextProvider: React.FC<CartContextProviderProps> = ({ childr
         },[cartProducts]
     );
 
-    /*
+    
     const handleSetPaymentIntent = useCallback((val: string | null) => {
         SetPaymentIntent(val);
         localStorage.setItem('FrameOfFamePaymentIntent',JSON.stringify(val));
         },[paymentIntent]);
-        */
-    const handleSetPaymentIntent = useCallback((val: string | null) => {
+   
+    /*const handleSetPaymentIntent = useCallback((val: string | null) => {
         SetPaymentIntent(val);
         localStorage.setItem('FrameOfFamePaymentIntent', JSON.stringify(val));
-    }, []);
+    }, []);     */
     
     const value={
         cartTotalQty,

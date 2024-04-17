@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import Container from "../Container";
 import logo from "./public/logo.png";
@@ -7,7 +6,15 @@ import UserMenu from "./UserMenu";
 import getCurrentUser from "@/actions/getCurrentUser";
 import SearchInput from "./SearchInput";
 import Categories from "./Categories";
-import ThemeBtn from "../ThemeBtn";
+import Image from 'next/image';
+
+// Navbar.tsx
+import dynamic from 'next/dynamic';
+
+// Dynamically import the ThemeBtn component with ssr: false
+const ThemeBtn = dynamic(() => import('../ThemeBtn'), {
+  ssr: false,
+});
 
 const Navbar = async () => {
 
@@ -22,9 +29,7 @@ const Navbar = async () => {
           <div className="flex items-center gap-4">
             {/* Navigation Links */}
             <Link href="/" className="flex items-center gap-2">
-              {/* Logo */}
-              <img src={logo.src} alt="Home" className="h-8" />
-              {/* Home text */}
+              <Image src={logo.src} alt="Home" className="h-8" width={32} height={32} />
               <span className="ml-2">Home</span>
             </Link>
 

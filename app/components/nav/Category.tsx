@@ -1,57 +1,62 @@
-import { IconType } from 'react-icons';
-import { useCallback,Suspense  } from 'react';
+'use client';
+import { useCallback, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import queryString from 'query-string';
+import { IconType } from 'react-icons';
+import { FiCheckCircle } from 'react-icons/fi';
+import { useTheme } from '@emotion/react';
 
 interface CategoryProps {
-    label: string;
-    Icon: IconType;
-    selected?: boolean;
+  label: string;
+  Icon?: React.ComponentType<{ className?: string }>;
+  selected?: boolean;
 }
 
-const Category: React.FC<CategoryProps> = ({ label, Icon, selected }) => {
-    const router = useRouter();
-    const params = useSearchParams();
+const Category: React.FC<CategoryProps> = ({ label, Icon = FiCheckCircle, selected }) => {
+  const router = useRouter();
+  const params = useSearchParams();
+  const [isDarkMode, setIsDarkMode] = useState(false); // State to keep track of dark mode
 
-    const handleClick = useCallback(() => {
-        if (label === 'All') {
-            router.push('/');
-        } else {
-            let currentQuery = {};
 
-            if (params) {
-                currentQuery = queryString.parse(params.toString());
-            }
+  const handleClick = useCallback(() => {
+    if (label === 'All') {
+      router.push('/');
+    } else {
+      let currentQuery = {};
+      if (params) {
+        currentQuery = queryString.parse(params.toString());
+      }
+      const updatedQuery: any = {
+        ...currentQuery,
+        category: label,
+      };
+      const url = queryString.stringifyUrl(
+        {
+          url: '/',
+          query: updatedQuery,
+        },
+        { skipNull: true }
+      );
+      router.push(url);
+    }
+  }, [label, params, router]);
 
-            const updatedQuery: any = {
-                ...currentQuery,
-                category: label,
-            };
+    // Function to toggle dark mode
+    const toggleDarkMode = () => {
+      setIsDarkMode((prevMode) => !prevMode);
+    };
 
-            const url = queryString.stringifyUrl(
-                {
-                    url: '/',
-                    query: updatedQuery,
-                },
-                {
-                    skipNull: true,
-                }
-            );
-
-            router.push(url);
-        }
-    }, [label, params, router]);
-
-    return (
-        <div onClick={handleClick} className={`flex items-center 
-        justify-center text-center gap-1 p-2 border-b-2 
-        hover:text-violet-500 transition cursor-pointer
-        ${selected ? 'border-b-violet-500 text-violet-500 pointer-events-auto' : 'border-transparent text-violet-200'}
-        `}>
-            <Icon size={20} /> {/* Render the icon */}
-            <div className='font-medium text-sm'>{label}</div>
-        </div>
-    );
+  return (
+    <div
+      onClick={handleClick}
+      className={`flex items-center justify-center text-center gap-1 p-2 border-b-2 hover:text-slate-300 transition cursor-pointer ${
+        selected ? 'border-b-slate-300 text-slate-300' : 'border-transparent'
+      } ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
+    >
+      <Icon size={20} />
+      <div className="font-medium text-sm">{label}</div>
+    </div>
+  );
 };
 
 export default Category;

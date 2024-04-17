@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+ import { useRouter } from "next/navigation";
+//import { useRouter } from "next/router";  Changed import statement
 import { CiSearch } from 'react-icons/ci';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import queryString from 'query-string';
@@ -18,7 +19,7 @@ const SearchInput = () => {
     defaultValues: {
       searchTerm: ''
     }
-  })
+  });
   
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
