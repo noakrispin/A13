@@ -20,7 +20,7 @@ const Admin = async () => {
     <Container>
       <Summary products={products} orders={orders} users={users}/>
       <div className="mt-4 mx-auto max-w-[1150px]">
-        <BarGraph data = {graphData}/>
+        {/* <BarGraph data={graphData}/> Remove this line if you don't want the BarGraph */}
       </div>
     </Container>
     </div>;

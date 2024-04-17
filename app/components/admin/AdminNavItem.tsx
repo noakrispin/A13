@@ -1,24 +1,23 @@
 import { IconType } from "react-icons";
+import { useTheme } from "next-themes"; // Import useTheme hook from next-themes
 
-// Define props interface for AdminNavItem component
-interface AdminNavItemProps{
-  selected?: boolean; // Optional boolean prop indicating if the item is selected
-  icon: IconType; // Required prop for icon type
-  label: string; // Required prop for label text
+interface AdminNavItemProps {
+  selected?: boolean;
+  icon: IconType;
+  label: string;
 }
 
-// Define AdminNavItem component
-const AdminNavItem: React.FC<AdminNavItemProps> = ({selected, icon: Icon, label})=> {
+const AdminNavItem: React.FC<AdminNavItemProps> = ({ selected, icon: Icon, label }) => {
+  const { theme } = useTheme(); // Get the current theme using useTheme hook
+  
   return (
-  <div className={`flex items-center justify-center text-center gap-1 p-2 border-b-2 hover:text-slate-300 transition cursor-pointer
-  ${selected ? 'border-b-slate-300 text-slate-300' : 'border-transparent text-slate-100'}`}>
-    {/* Render the icon using the provided icon type */}
-    <Icon size={20}/>
-     {/* Render label text */}
-    <div className="font-medium text-sm text-center break-normal">{label}</div>
-  </div>
-
- );
+    <div className={`flex items-center justify-center text-center gap-1 p-2 border-b-2 hover:text-slate-300 transition cursor-pointer
+      ${selected ? 'border-b-slate-300 text-slate-300' : 'border-transparent'} 
+      ${theme === 'dark' ? 'text-gray-400' : 'text-gray-800'}`}> {/* Apply different text colors based on the theme */}
+      <Icon size={20}/>
+      <div className="font-medium text-sm text-center break-normal">{label}</div>
+    </div>
+  );
 };
 
-export default AdminNavItem;// Export AdminNavItem component
+export default AdminNavItem;

@@ -28,10 +28,10 @@ const Navbar = async () => {
             </Link>
 
           </div>
-          {/*className="hidden md:block" */}
+          {/*className="hidden md:block"
           <div > 
             <SearchInput/>
-          </div>
+          </div> */}
           {/* Right side: Account and Cart Icons */}
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <Link href="/" className="flex items-center gap-2"><UserMenu currentUser={currentUser}/></Link>
@@ -44,7 +44,7 @@ const Navbar = async () => {
           </div>
         </div>
       </Container>
-      <Categories/> 
+      {/* <Categories/> */} 
     </div>
  
   );
