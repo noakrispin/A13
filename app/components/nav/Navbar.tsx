@@ -6,7 +6,15 @@ import UserMenu from "./UserMenu";
 import getCurrentUser from "@/actions/getCurrentUser";
 import SearchInput from "./SearchInput";
 import Categories from "./Categories";
-import ThemeBtn from "../ThemeBtn";
+import Image from 'next/image';
+
+// Navbar.tsx
+import dynamic from 'next/dynamic';
+
+// Dynamically import the ThemeBtn component with ssr: false
+const ThemeBtn = dynamic(() => import('../ThemeBtn'), {
+  ssr: false,
+});
 
 const Navbar = async () => {
 
@@ -21,17 +29,15 @@ const Navbar = async () => {
           <div className="flex items-center gap-4">
             {/* Navigation Links */}
             <Link href="/" className="flex items-center gap-2">
-              {/* Logo */}
-              <img src={logo.src} alt="Home" className="h-8" />
-              {/* Home text */}
+              <Image src={logo.src} alt="Home" className="h-8" width={32} height={32} />
               <span className="ml-2">Home</span>
             </Link>
 
           </div>
-          {/*className="hidden md:block"
+          {/*className="hidden md:block" */}
           <div > 
             <SearchInput/>
-          </div> */}
+          </div>
           {/* Right side: Account and Cart Icons */}
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <Link href="/" className="flex items-center gap-2"><UserMenu currentUser={currentUser}/></Link>

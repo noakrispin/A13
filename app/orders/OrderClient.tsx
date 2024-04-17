@@ -7,7 +7,7 @@ import Heading from "@/app/components/Heading";
 import Status from "@/app/components/Status";
 import { MdAccessTimeFilled, MdDeliveryDining, MdDone, MdRemoveRedEye } from "react-icons/md";
 import ActionBtn from "@/app/components/ActionBtn";
-import { JSX, useCallback } from "react";
+import { JSX, useCallback, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -24,6 +24,17 @@ type ExtendedOrder = Order & {
 
 const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
     const router = useRouter();
+
+    
+    let isDarkModeEnabled = false;
+    let darkMode = false;
+
+    if (typeof window !== 'undefined') {
+        isDarkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        darkMode = isDarkModeEnabled ? true : false;
+    }
+
+
     let rows: any = [];
 
     if (orders) {
@@ -38,18 +49,20 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
     }
 
     const columns: GridColDef[] = [
-        { field: "id", headerName: "ID", width: 220 },
-        { field: "customer", headerName: "Customer Name", width: 130 },
+        { field: "id", headerName: "ID", width: 220, cellClassName: 'text-white'},
+        { field: "customer", headerName: "Customer Name", width: 13, cellClassName: 'text-white' },
         {
             field: "amount",
             headerName: "Amount (USD)",
             width: 130,
+            cellClassName: 'text-white',
             renderCell: (params) => <div className="font-bold">{params.row.amount}</div>,
         },
         {
             field: "paymentStatus",
             headerName: "Payment Status",
             width: 130,
+            cellClassName: 'text-white',
             renderCell: (params) => (
                 <div>
                     {params.row.paymentStatus === "pending" ? (
@@ -105,6 +118,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
             field: "date",
             headerName: "Date",
             width: 130,
+            cellClassName: 'text-white',
         },
         {
             field: "action",
@@ -135,45 +149,44 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
     );
 
     return (
-        <div className="max-w-[1150px] m-auto text-xl ">
-            <div className="mb-4 mt-8 ">
+        <div className="max-w-[1150px] m-auto text-xl">
+            <div className="mb-4 mt-8">
                 <Heading title="Manage Orders" center />
             </div>
-            <div style={{ height: 600, width: "100%"}}>
+            <div style={{ height: 600, width: "100%" }}>
                 <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    style={{ color: 'white' }} // Make all text in DataGrid white
-                    initialState={{
-                        pagination: {
-                            paginationModel: { page: 0, pageSize: 9 },
-                        },
-                    }}
-                    pageSizeOptions={[9, 20]}
-                    checkboxSelection
-                    disableRowSelectionOnClick
-                    components={{
-                        BaseCheckbox: CustomWhiteCheckbox,
-                    }}
-                    sx={{
-                        '& .MuiDataGrid-row': {
-                            color: 'white', // Make all row text white
-                        },
-                        '& .MuiDataGrid-columnHeader': {
-                            color: 'white', // Make all column header text white
-                        },
-                        '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
-                         color: 'white',
-                     },
-                     // Apply white color to the selected row count footer text
-                     '& .Mui-selected': {
-                         color: 'white',
-                     },
-                     // Apply white color to pagination controls and rows per page text
-                     '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
-                         color: 'white',
-                     },
-                    }}
+                rows={rows}
+                columns={columns}
+                style={{ color: darkMode ? 'white' : 'black' }}
+                initialState={{
+                pagination: {
+                    paginationModel: { page: 0, pageSize: 9 },
+                },
+                }}
+                pageSizeOptions={[9, 20]}
+                checkboxSelection
+                disableRowSelectionOnClick
+                components={{
+                    BaseCheckbox: CustomWhiteCheckbox,
+                }}
+                sx={{
+                    '& .MuiDataGrid-row': {
+                        color: darkMode ? 'white' : 'black', // Set row text color based on mode
+                    },
+                    '& .MuiDataGrid-columnHeader': {
+                        color: darkMode ? 'white' : 'black', // Set header text color based on mode
+                        backgroundColor: darkMode ? '#222' : '#f0f0f0', // Adjust header background color
+                    },
+                    '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
+                        color: darkMode ? 'white' : 'black',
+                    },
+                    '& .Mui-selected': {
+                        color: darkMode ? 'white' : 'black',
+                    },
+                    '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
+                        color: darkMode ? 'white' : 'black',
+                    },
+                }}
                 />
             </div>
         </div>

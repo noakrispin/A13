@@ -41,7 +41,7 @@ const RegisterFrom: React.FC<RegisterFromProps> = ({currentUser}) => {
             router.push('/cart')
             router.refresh();
         }
-    },[currentUser]);
+    },[currentUser,router]);
 
      // Function to handle form submission
     const onSubmit: SubmitHandler<FieldValues> = (data) => 

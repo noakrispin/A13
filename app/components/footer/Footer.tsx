@@ -6,7 +6,7 @@ import { AiFillInstagram, AiFillTwitterCircle } from 'react-icons/ai';
 
 const Footer: React.FC = () => {
   return (
-    <footer className=" text-slate-200 text-sm mt-16 relative">
+    <footer className=" text-sm mt-16 relative">
       {/* Elliptical background */}
       <div className="absolute inset-0 md:w-1/2">
         <div className="Ellipse1 w-full h-full bg-gradient-to-br from-violet-900 to-transparent bg-opacity-60 rounded-full blur-2xl"></div>

@@ -21,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Add any other meta tags, stylesheets, or scripts here */}
       </head>
       <body>
+        {/* Wrap the <body> element with the 'use client' directive */}
         <ThemeProvider>
           <Toaster toastOptions={{ style: { background: 'rgb(51 65 85)', color: '#fff' } }} />
           <CartProvider>

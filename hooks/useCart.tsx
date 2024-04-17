@@ -145,16 +145,16 @@ export const CartContextProvider: React.FC<CartContextProviderProps> = ({ childr
         },[cartProducts]
     );
 
-    /*
+    
     const handleSetPaymentIntent = useCallback((val: string | null) => {
         SetPaymentIntent(val);
         localStorage.setItem('FrameOfFamePaymentIntent',JSON.stringify(val));
         },[paymentIntent]);
-        */
-    const handleSetPaymentIntent = useCallback((val: string | null) => {
+   
+    /*const handleSetPaymentIntent = useCallback((val: string | null) => {
         SetPaymentIntent(val);
         localStorage.setItem('FrameOfFamePaymentIntent', JSON.stringify(val));
-    }, []);
+    }, []);     */
     
     const value={
         cartTotalQty,

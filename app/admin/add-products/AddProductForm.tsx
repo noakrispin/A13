@@ -41,7 +41,7 @@ const AddProductForm = () => {
   const [images, setImages] = useState<ImageType[] | null>();
   const [isProductCreated, setIsProductCreated] = useState(false);
 
-
+  
   // Initialize React hook form
   const {
     register,
@@ -63,9 +63,10 @@ const AddProductForm = () => {
     },
   });
 
+
   // useEffect hook to reset form and images state when product is created
   useEffect(() => {setCustomValue("images", images);    
-  }, [images]);
+  }, [images]); //
 
   useEffect(() => {
     if (isProductCreated) {
@@ -73,7 +74,7 @@ const AddProductForm = () => {
       setImages(null);
       setIsProductCreated(false);
     }
-  }, [isProductCreated]); //reset
+  }, [isProductCreated,reset,setImages]); //reset
 
   // Function to handle form submission
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
