@@ -1,6 +1,6 @@
 // Import necessary icons from react-icons
 import { MdStorefront } from "react-icons/md";
-import { HiPaintBrush } from "react-icons/hi2";
+import { FaPaintbrush } from "react-icons/fa6";
 import { TbPhoto } from "react-icons/tb";
 import { GiSpartanHelmet } from "react-icons/gi";
 import { RiNftFill } from "react-icons/ri";
@@ -13,7 +13,7 @@ export const categories = [
   },
   {
     label: "Painting", // Label for the category
-    icon: HiPaintBrush, // Icon component for the category
+    icon: FaPaintbrush, // Icon component for the category
   },
   {
     label: "Photography", // Label for the category

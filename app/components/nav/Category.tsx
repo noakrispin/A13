@@ -2,7 +2,10 @@ import { useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import queryString from 'query-string';
 import { IconType } from 'react-icons';
-import { HiPaintBrush } from 'react-icons/hi2';
+
+import { FiCheckCircle } from 'react-icons/fi'; // Import FiCheckCircle icon
+
+
 
 interface CategoryProps {
   label: string;
@@ -10,7 +13,8 @@ interface CategoryProps {
   selected?: boolean;
 }
 
-const Category: React.FC<CategoryProps> = ({ label, Icon = HiPaintBrush, selected }) => {
+const Category: React.FC<CategoryProps> = ({ label, Icon = FiCheckCircle, selected }) => {
+
   const router = useRouter();
   const params = useSearchParams();
 

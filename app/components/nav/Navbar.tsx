@@ -44,7 +44,7 @@ const Navbar = async () => {
           </div>
         </div>
       </Container>
-      {/* <Categories/> */} 
+      <Categories/> 
     </div>
  
   );
