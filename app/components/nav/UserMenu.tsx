@@ -94,8 +94,8 @@ const UserMenu: React.FC<UserMenuProps>=({currentUser}) => {
                 </div>
             )}
         </div>
-        {/* Backdrop to close the menu when clicked outside */}
-        {isOpen ? <BackDrop onClick={toggleOpen}/> : null}
+        {/* Backdrop to close the menu when clicked outside 
+        {isOpen ? <BackDrop onClick={toggleOpen}/> : null}*/}
     </>
   );
 };

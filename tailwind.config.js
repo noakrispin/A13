@@ -11,10 +11,12 @@ module.exports = {
         dark: {
           "primaryBG": "#0a090b", // Dark mode background color
           // Define other dark mode colors here
+          "text": "#ffffff", // Dark mode text color
         },
         light: {
           "primaryBG": "#ffffff", // Light mode background color
           // Define other light mode colors here
+          "text": "#000000", // Light mode text color
         },
         "Purple": "#f5f2ff", // Common color
       },
