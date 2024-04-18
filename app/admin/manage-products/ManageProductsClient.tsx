@@ -29,6 +29,14 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
   const storage = getStorage(firebaseApp); // Initialize Firebase storage
   let rows: any = []; // Initialize rows variable for DataGrid
 
+  let isDarkModeEnabled = false;
+  let darkMode = false;
+
+  if (typeof window !== 'undefined') {
+      isDarkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      darkMode = isDarkModeEnabled ;
+  }
+
    // Populate rows with product data
   if (products) {
     rows = products.map((product) => {
@@ -46,8 +54,8 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
 
   // Define columns for DataGrid
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 220, cellClassName: "text-white" },
-    { field: "name", headerName: "Name", width: 220 ,cellClassName: "text-white" },
+    { field: "id", headerName: "ID", width: 220 },
+    { field: "name", headerName: "Name", width: 220 },
     {
       field: "price",
       headerName: "Price(USD)",
@@ -57,10 +65,10 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
           <div className="font-bold text-violet-500'">{params.row.price}</div>
         );
       },
-      cellClassName: "text-white"
+
     },
-    { field: "category", headerName: "Category", width: 100, cellClassName: "text-white" },
-    { field: "artistName", headerName: "Artist Name", width: 100, cellClassName: "text-white" },
+    { field: "category", headerName: "Category", width: 100 },
+    { field: "artistName", headerName: "Artist Name", width: 100},
     {
       field: "inStock",
       headerName: "inStock",
@@ -86,13 +94,11 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
           </div>
         );
       },
-      cellClassName: "text-white"
     },
     {
       field: "action",
       headerName: "Actions",
       width: 200,
-      cellClassName: "text-white",
       renderCell: (params) => {
         return (
           <div className="flex justify-between gap-4 w-full">
@@ -203,7 +209,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
       <div className="mb-4 mt-8">
         <Heading title="Manage Products" center />
       </div>
-      <div style={{ height: 600, width: "100%"}}>
+      <div style={{ height: 600, width: "100%", backgroundColor: darkMode ? '#222' : '#a488bf' }}>
       <DataGrid
     rows={rows}
     columns={columns}
@@ -219,29 +225,26 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
     components={{
       BaseCheckbox: CustomWhiteCheckbox,
   }}
-    sx={{
-        // Apply white color to all row text
-        '& .MuiDataGrid-row': {
-            color: 'white',
-        },
-        // Apply white color to column headers
-        '& .MuiDataGrid-columnHeader': {
-            color: 'white',
-        },
-        // Apply white color to the footer container and pagination toolbar
-        '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
-            color: 'white',
-        },
-        // Apply white color to the selected row count footer text
-        '& .Mui-selected': {
-            color: 'white',
-        },
-        // Apply white color to pagination controls and rows per page text
-        '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
-            color: 'white',
-        },
-    }}
-/>
+                    sx={{
+                        '& .MuiDataGrid-row': {
+                            color:  'black', // Set row text color based on mode
+                        },
+                        '& .MuiDataGrid-columnHeader': {
+                            color: darkMode ? 'white' : 'black', // Set header text color based on mode
+                            backgroundColor: darkMode ? '#222' : '#a488bf', // Adjust header background color
+                        },
+                        '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
+                            color:  'black',
+                        },
+                        '& .Mui-selected': {
+                            color:'black',
+                        },
+                        '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
+                            color:'black',
+                        },
+                    }}
+
+                  />
 
       </div>
     </div>

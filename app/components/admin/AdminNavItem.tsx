@@ -13,7 +13,7 @@ const AdminNavItem: React.FC<AdminNavItemProps> = ({ selected, icon: Icon, label
   return (
     <div className={`flex items-center justify-center text-center gap-1 p-2 border-b-2 hover:text-slate-300 transition cursor-pointer
       ${selected ? 'border-b-slate-300 text-slate-300' : 'border-transparent'} 
-      ${theme === 'dark' ? 'text-gray-400' : 'text-gray-800'}`}> {/* Apply different text colors based on the theme */}
+      ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}> {/* Apply different text colors based on the theme */}
       <Icon size={20}/>
       <div className="font-medium text-sm text-center break-normal">{label}</div>
     </div>
