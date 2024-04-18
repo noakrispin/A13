@@ -5,6 +5,7 @@ import prisma from '@/libs/prismadb'
 import { NextResponse } from 'next/server'
 import { CartProductType } from '@/app/product/[productId]/ProductDetails';
 import getCurrentUser from '@/actions/getCurrentUser';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string,
 {
@@ -19,12 +20,15 @@ const calcultateOrderAmount = (items: CartProductType[]) =>{
     }, 0);
 
     const price: any = Math.floor(totalPrice);
-
     return price;
 };
 
-export async function POST(request:Request) {
-
+//export async function POST(request:Request) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
+    }
+      
     const currentUser= await getCurrentUser();
 
     if(!currentUser){
@@ -33,7 +37,7 @@ export async function POST(request:Request) {
     }
 
 
-    const body = await request.json();
+    const body = req.body;
     const {items, payment_intent_id} = body;
     const total = calcultateOrderAmount(items) * 100;
     const orderData={
