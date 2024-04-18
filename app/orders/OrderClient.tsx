@@ -31,7 +31,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
 
     if (typeof window !== 'undefined') {
         isDarkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        darkMode = isDarkModeEnabled ? true : false;
+        darkMode = isDarkModeEnabled ;
     }
 
 
@@ -49,76 +49,77 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
     }
 
     const columns: GridColDef[] = [
-        { field: "id", headerName: "ID", width: 220, cellClassName: 'text-white'},
-        { field: "customer", headerName: "Customer Name", width: 13, cellClassName: 'text-white' },
+        { field: "id", headerName: "ID", width: 220},
+        { field: "customer", headerName: "Customer Name", width: 130},
         {
             field: "amount",
             headerName: "Amount (USD)",
             width: 130,
-            cellClassName: 'text-white',
-            renderCell: (params) => <div className="font-bold">{params.row.amount}</div>,
+            renderCell: (params) => <div className="font-bold text-slate-800">{params.row.amount}</div>,
         },
         {
             field: "paymentStatus",
             headerName: "Payment Status",
             width: 130,
-            cellClassName: 'text-white',
-            renderCell: (params) => (
-                <div>
-                    {params.row.paymentStatus === "pending" ? (
-                        <Status
-                            text="pending"
-                            icon={MdAccessTimeFilled}
-                            bg="bg-slate-200"
-                            color="text-slate-700"
-                        />
-                    ) : params.row.paymentStatus === "complete" ? (
-                        <Status
-                            text="complete"
-                            icon={MdDone}
-                            bg="bg-green-200"
-                            color="text-green-700"
-                        />
-                    ) : null}
-                </div>
-            ),
+            renderCell: (params) => {
+                return(
+                    <div>
+                        {params.row.paymentStatus === "pending" ? (
+                            <Status
+                                text="pending"
+                                icon={MdAccessTimeFilled}
+                                bg="bg-slate-200"
+                                color="text-slate-700"
+                            />
+                        ) : params.row.paymentStatus === "complete" ? (
+                            <Status
+                                text="complete"
+                                icon={MdDone}
+                                bg="bg-green-200"
+                                color="text-green-700"
+                            />
+                        ) : null}
+                    </div>
+                );
+            },
         },
         {
             field: "deliveryStatus",
             headerName: "Delivery Status",
             width: 130,
-            renderCell: (params) => (
-                <div>
-                    {params.row.deliveryStatus === "pending" ? (
-                        <Status
-                            text="pending"
-                            icon={MdAccessTimeFilled}
-                            bg="bg-slate-200"
-                            color="text-slate-700"
-                        />
-                    ) : params.row.deliveryStatus === "dispatched" ? (
-                        <Status
-                            text="dispatched"
-                            icon={MdDeliveryDining}
-                            bg="bg-purple-200"
-                            color="text-purple-700"
-                        />
-                    ) : params.row.deliveryStatus === "delivered" ? (
-                        <Status
-                            text="delivered"
-                            icon={MdDone}
-                            bg="bg-green-200"
-                            color="text-green-700"
-                        />
-                    ) : null}
-                </div>
-            ),
+            renderCell: (params) => {
+                return(
+                    <div>
+                        {params.row.deliveryStatus === "pending" ? (
+                            <Status
+                                text="pending"
+                                icon={MdAccessTimeFilled}
+                                bg="bg-slate-200"
+                                color="text-slate-700"
+                            />
+                        ) : params.row.deliveryStatus === "dispatched" ? (
+                            <Status
+                                text="dispatched"
+                                icon={MdDeliveryDining}
+                                bg="bg-purple-200"
+                                color="text-purple-700"
+                            />
+                        ) : params.row.deliveryStatus === "delivered" ? (
+                            <Status
+                                text="delivered"
+                                icon={MdDone}
+                                bg="bg-green-200"
+                                color="text-green-700"
+                            />
+                        ) : null}
+                    </div>
+                );
+            },
         },
         {
             field: "date",
             headerName: "Date",
             width: 130,
-            cellClassName: 'text-white',
         },
         {
             field: "action",
@@ -129,6 +130,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
                     <ActionBtn
                         icon={MdRemoveRedEye}
                         onClick={() => router.push(`/order/${params.row.id}`)}
+                        
                     />
                 </div>
             ),
@@ -140,24 +142,23 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
         <Checkbox
             {...props}
             sx={{
-                color: 'white', // Checkbox color when not checked
+                color: 'black', // Checkbox color when not checked
                 '&.Mui-checked': {
-                    color: 'white', // Checkbox color when checked
+                    color: 'black', // Checkbox color when checked
                 },
             }}
         />
     );
 
     return (
-        <div className="max-w-[1150px] m-auto text-xl">
+        <div className={`max-w-[1150px] m-auto text-xl `}>
             <div className="mb-4 mt-8">
                 <Heading title="Manage Orders" center />
             </div>
-            <div style={{ height: 600, width: "100%" }}>
+            <div style={{ height: 600, width: "100%", backgroundColor: darkMode ? '#222' : '#a784d1' }}>
                 <DataGrid
                 rows={rows}
                 columns={columns}
-                style={{ color: darkMode ? 'white' : 'black' }}
                 initialState={{
                 pagination: {
                     paginationModel: { page: 0, pageSize: 9 },
@@ -171,20 +172,20 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
                 }}
                 sx={{
                     '& .MuiDataGrid-row': {
-                        color: darkMode ? 'white' : 'black', // Set row text color based on mode
+                        color:  'black', // Set row text color based on mode
                     },
                     '& .MuiDataGrid-columnHeader': {
                         color: darkMode ? 'white' : 'black', // Set header text color based on mode
-                        backgroundColor: darkMode ? '#222' : '#f0f0f0', // Adjust header background color
+                        backgroundColor: darkMode ? '#222' : '#a784d1', // Adjust header background color
                     },
                     '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
-                        color: darkMode ? 'white' : 'black',
+                        color:  'black',
                     },
                     '& .Mui-selected': {
-                        color: darkMode ? 'white' : 'black',
+                        color:'black',
                     },
                     '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
-                        color: darkMode ? 'white' : 'black',
+                        color:'black',
                     },
                 }}
                 />

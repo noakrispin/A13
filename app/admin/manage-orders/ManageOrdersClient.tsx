@@ -26,6 +26,14 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
     const router = useRouter();
     let rows: any = [];
 
+    let isDarkModeEnabled = false;
+    let darkMode = false;
+
+    if (typeof window !== 'undefined') {
+        isDarkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        darkMode = isDarkModeEnabled ;
+    }
+
     if (orders) {
         rows = orders.map((order) => ({
             id: order.id,
@@ -178,11 +186,10 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
             <div className="mb-4 mt-8 ">
                 <Heading title="Manage Orders" center />
             </div>
-            <div style={{ height: 600, width: "100%"}}>
+            <div style={{ height: 600, width: "100%", backgroundColor: darkMode ? '#222' : '#a784d1' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
-                    style={{ color: 'white' }} // Make all text in DataGrid white
                     initialState={{
                         pagination: {
                             paginationModel: { page: 0, pageSize: 9 },
@@ -196,22 +203,21 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
                     }}
                     sx={{
                         '& .MuiDataGrid-row': {
-                            color: 'white', // Make all row text white
+                            color:  'black', // Set row text color based on mode
                         },
                         '& .MuiDataGrid-columnHeader': {
-                            color: 'white', // Make all column header text white
+                            color: darkMode ? 'white' : 'black', // Set header text color based on mode
+                            backgroundColor: darkMode ? '#222' : '#a784d1', // Adjust header background color
                         },
                         '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
-                         color: 'white',
-                     },
-                     // Apply white color to the selected row count footer text
-                     '& .Mui-selected': {
-                         color: 'white',
-                     },
-                     // Apply white color to pagination controls and rows per page text
-                     '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
-                         color: 'white',
-                     },
+                            color:  'black',
+                        },
+                        '& .Mui-selected': {
+                            color:'black',
+                        },
+                        '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
+                            color:'black',
+                        },
                     }}
                 />
             </div>
