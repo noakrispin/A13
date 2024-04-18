@@ -155,7 +155,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
             <div className="mb-4 mt-8">
                 <Heading title="Manage Orders" center />
             </div>
-            <div style={{ height: 600, width: "100%", backgroundColor: darkMode ? '#222' : '#a784d1' }}>
+            <div style={{ height: 600, width: "100%", backgroundColor: darkMode ? '#222' : '#a488bf' }}>
                 <DataGrid
                 rows={rows}
                 columns={columns}
@@ -176,7 +176,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
                     },
                     '& .MuiDataGrid-columnHeader': {
                         color: darkMode ? 'white' : 'black', // Set header text color based on mode
-                        backgroundColor: darkMode ? '#222' : '#a784d1', // Adjust header background color
+                        backgroundColor: darkMode ? '#222' : '#a488bf', // Adjust header background color
                     },
                     '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
                         color:  'black',
