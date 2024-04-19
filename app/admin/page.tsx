@@ -23,7 +23,7 @@ const Admin = async () => {
       {/* Render the Summary component with products, orders, and users */}
       <Summary products={products} orders={orders} users={users}/>
       <div className="mt-4 mx-auto max-w-[1150px]">
-        {/* <BarGraph data={graphData}/> Remove this line if you don't want the BarGraph */}
+        <BarGraph data={graphData}/> 
       </div>
     </Container>
     </div>;

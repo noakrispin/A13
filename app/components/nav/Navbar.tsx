@@ -4,7 +4,6 @@ import logo from "./public/logo.png";
 import CartCount from "./CartCount";
 import UserMenu from "./UserMenu";
 import getCurrentUser from "@/actions/getCurrentUser";
-import SearchInput from "./SearchInput";
 import Categories from "./Categories";
 import Image from 'next/image';
 
@@ -35,9 +34,7 @@ const Navbar = async () => {
 
           </div>
           {/*className="hidden md:block" */}
-          <div > 
-            <SearchInput/>
-          </div>
+
           {/* Right side: Account and Cart Icons */}
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <Link href="/" className="flex items-center gap-2"><UserMenu currentUser={currentUser}/></Link>
