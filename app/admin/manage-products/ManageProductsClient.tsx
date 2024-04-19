@@ -37,7 +37,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({ products })
         category: product.category,
         artistName: product.Artist_Name,
         inStock: product.inStock,
-        image: product.Images,
+        image: product.Image,
       };
     });
   }
