@@ -1,4 +1,5 @@
 'use client';
+// Import necessary dependencies and components
 import React from 'react';
 import { formatPrices } from "@/Utils/formatPrices";
 import { truncateText } from "@/Utils/truncateText";
@@ -8,13 +9,15 @@ import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+// Define the props interface for the ProductsCard component
 interface productsCardProps {
-    data: any
+    data: any; // Data object containing product information
 }
 
+// ProductsCard component definition
 const ProductsCard: React.FC<productsCardProps> = ({ data }) => {
-    const router = useRouter();
-
+    const router = useRouter(); // Initialize the useRouter hook
+    // Product card container with onClick event handler to navigate to product detail page
     return (
         <div
             onClick={() => router.push(`/product/${data.id}`)} // Navigate to product detail page on click
@@ -31,12 +34,14 @@ const ProductsCard: React.FC<productsCardProps> = ({ data }) => {
             text-sm
             shadow-sm shadow-slate-400"
         >
+            {/* Container for product information */}
             <div className="
                 flex flex-col
                 items-center
                 w-full
                 gap-1"
             >
+                {/* Product image */}
                 <div className="
                     aspect-square
                     overflow-hidden
@@ -53,17 +58,21 @@ const ProductsCard: React.FC<productsCardProps> = ({ data }) => {
                         className="w-full h-full object-contain"
                     />
                 </div>
+                {/* Product name */}
                 <div className="mt-4">
                     {truncateText(data.name)}
                 </div>
+                {/* Artist name */}
                 <div className="mt-4">{truncateText(data.Artist_Name)}</div>
                 <div>
+                    {/* Product rating */}
                     <Rating
                         value={5}
                         icon={<FavoriteIcon fontSize="inherit" className="red-heart" />}
                         emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
                     />
                 </div>
+                {/* Product price */}
                 <div className="font-semibold">{formatPrices(data.price)}</div>
             </div>
         </div>

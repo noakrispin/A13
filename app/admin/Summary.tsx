@@ -1,25 +1,30 @@
-'use client'
+'use client';
 
+// Importing necessary modules and components
 import { Order, Product, User } from "@prisma/client";
 import { useEffect, useState } from "react";
 import Heading from "../components/Heading";
 import { formatPrices } from "@/Utils/formatPrices";
 import { formatNumber } from "@/Utils/formatNumber";
 
+// Define the props for the Summary component
 interface SummaryProps{
     orders: Order[];
     products: Product[];
     users: User[]
 }
 
+// Define the type for summary data
 type SummaryDataType = {
     [key: string]:{
         label: string;
         digit: number;
-    }
+    };
 }
 
+// Define the Summary functional component
 const Summary:React.FC<SummaryProps> = ({orders, products, users}) => {
+    // State variable to store summary data
     const [summaryData, setSummaryData] = useState<SummaryDataType>({
         sale:{
             label: 'Total Sale',
@@ -45,26 +50,30 @@ const Summary:React.FC<SummaryProps> = ({orders, products, users}) => {
             label: 'Total Users',
             digit: 0
         },
-    })
+    });
 
+    // useEffect hook to update summary data when orders, products, or users change
     useEffect(()=>{
         setSummaryData((prev) => {
             let tempData = {...prev}
 
+            // Calculate total sale
             const totalSale = orders.reduce((acc,item) =>{
                 if(item.status === 'complete'){
                     return acc + item.amount
                 }else return acc
-            }, 0)
+            }, 0);
 
+            // Filter paid and unpaid orders
             const paidOrders = orders.filter((order =>{
                 return order.status === 'complete'
-            }))
+            }));
 
             const unpaidOrders = orders.filter((order =>{
                 return order.status === 'pending'
-            }))
+            }));
 
+            // Update summary data
             tempData.sale.digit = totalSale;
             tempData.orders.digit = orders.length;
             tempData.paidOrders.digit = paidOrders.length;
@@ -74,10 +83,12 @@ const Summary:React.FC<SummaryProps> = ({orders, products, users}) => {
 
             return tempData
         })
-    },[orders, products, users])
+    },[orders, products, users]);
 
-    const summaryKeys = Object.keys(summaryData)
+    // Extract keys from summaryData object
+    const summaryKeys = Object.keys(summaryData);
 
+    // Render the Summary component
     return ( <div className="max-w-[1150px] m-auto">
         <div className="mb-4 mt-8">
             <Heading title="Summary" center/>
@@ -87,6 +98,7 @@ const Summary:React.FC<SummaryProps> = ({orders, products, users}) => {
                 summaryKeys && summaryKeys.map((key) =>{
                     return <div key={key} className="rounded-xl border-2 p-4 flex flex-col items-center gap-2 transition ">
                         <div className="text-xl md:text-4xl font-bold ">
+                            {/* Conditionally format the summary digit based on the label */}
                             {
                                 summaryData[key].label === 'Total Sale' ? <>{formatPrices(summaryData[key].digit)}</> : <>{formatNumber(summaryData[key].digit)}</>
                             }

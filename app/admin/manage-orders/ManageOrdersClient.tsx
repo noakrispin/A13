@@ -1,5 +1,6 @@
 "use client";
 
+// Importing necessary modules and components
 import { Order, User } from "@prisma/client";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { formatPrices } from "@/Utils/formatPrices";
@@ -14,26 +15,31 @@ import { useRouter } from "next/navigation";
 import moment from "moment";
 import Checkbox, { CheckboxProps } from "@mui/material/Checkbox";
 
+// Interface for props of ManageOrdersClient component
 interface ManageOrdersClientProps {
-    orders: ExtendedOrder[];
+    orders: ExtendedOrder[]; // Orders array with extended properties
 }
 
+// ExtendedOrder type extending Order type with additional user property
 type ExtendedOrder = Order & {
-    user: User;
+    user: User;// User associated with the order
 };
 
+// Define the ManageOrdersClient functional component
 const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
-    const router = useRouter();
-    let rows: any = [];
+    const router = useRouter(); // Initialize useRouter hook from Next.js
+    let rows: any = []; // Initialize rows variable
 
-    let isDarkModeEnabled = false;
-    let darkMode = false;
+    let isDarkModeEnabled = false; // Initialize isDarkModeEnabled variable
+    let darkMode = false; // Initialize darkMode variable
 
+     // Check if window is available to determine if dark mode is enabled
     if (typeof window !== 'undefined') {
         isDarkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        darkMode = isDarkModeEnabled ;
-    }
+        darkMode = isDarkModeEnabled ;// Set darkMode to isDarkModeEnabled
+    } 
 
+    // Map orders to rows array with required properties
     if (orders) {
         rows = orders.map((order) => ({
             id: order.id,
@@ -45,6 +51,7 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
         }));
     }
 
+    // Define columns for DataGrid
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", width: 220 },
         { field: "customer", headerName: "Customer Name", width: 130 },
@@ -137,6 +144,7 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
         },
     ];
 
+     // Function to handle dispatching an order
     const handleDispatch = useCallback((id: any) => {
         axios
             .put("/api/order", {
@@ -145,14 +153,15 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
             })
             .then(() => {
                 toast.success("Order Dispatched");
-                router.refresh();
+                router.refresh(); // Refresh the page after dispatching the order
             })
             .catch((err) => {
-                toast.error("Oops! Something went wrong");
-                console.error(err);
+                toast.error("Oops! Something went wrong"); // Display error toast if request fails
+                console.error(err); // Log the error to console
             });
     }, [router]);
 
+    // Function to handle delivering an order
     const handleDeliver = useCallback((id: any) => {
         axios
             .put("/api/order", {
@@ -160,15 +169,16 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
                 deliveryStatus: "delivered",
             })
             .then(() => {
-                toast.success("Order Delivered");
-                router.refresh();
+                toast.success("Order Delivered"); // Display success toast if delivery is successful
+                router.refresh(); // Refresh the page after delivering the order
             })
             .catch((err) => {
-                toast.error("Oops! Something went wrong");
-                console.error(err);
+                toast.error("Oops! Something went wrong"); // Display error toast if request fails
+                console.error(err); // Log the error to console
             });
     }, [router]);
 
+    // Custom Checkbox component with white color
     const CustomWhiteCheckbox = (props: JSX.IntrinsicAttributes & CheckboxProps) => (
         <Checkbox
             {...props}
@@ -181,6 +191,7 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
         />
     );
 
+    // Render the ManageOrdersClient component
     return (
         <div className="max-w-[1150px] m-auto text-xl">
             <div className="mb-4 mt-8 ">
@@ -224,5 +235,5 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
         </div>
     );
 };
-
+// Export the ManageOrdersClient component
 export default ManageOrdersClient;

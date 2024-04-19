@@ -1,11 +1,13 @@
 import { IconType } from "react-icons";
 
+// Define the props interface for the ActionBtn component
 interface ActionBtnProps {
-  icon: IconType;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean;
+  icon: IconType; // Icon component to be displayed on the button
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void; // onClick event handler function
+  disabled?: boolean; // Optional prop to disable the button
 }
 
+// ActionBtn component definition
 const ActionBtn: React.FC<ActionBtnProps> = ({
   icon: Icon,
   onClick,
@@ -29,6 +31,7 @@ const ActionBtn: React.FC<ActionBtnProps> = ({
         ${disabled && "opacity-50 cursor-not-allowed"}
     `}
     >
+      {/* Render the Icon component with size and color */}
       <Icon size={18} color={"white"}/>
     </button>
   );

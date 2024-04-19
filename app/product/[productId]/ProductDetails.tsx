@@ -31,10 +31,12 @@ export type SelectedImgType = {
     image: string;
 };
 
+// Horizontal divider component
 const Horizontal = () => {
     return <hr className="w-[80%] my-2 bg-violet-500" />;
 };
 
+// ProductDetails component
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     const { handleAddProductToCart, cartProducts } = useCart();
 
@@ -53,6 +55,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
     const router = useRouter();
 
+    // Check if the product is already in the cart when cartProducts or product.id change
     useEffect(() => {
         setIsProductInCart(false);
 
@@ -67,21 +70,29 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black">
+             {/* Product Image */}
             <div className="md:order-2">
                 <ProductsImg cartProduct={cartProduct} product={product} />
             </div>
+            {/* Product Details */}
             <div className="md:order-1 p-4 bg-white shadow-md rounded-lg">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-6">{product.name}</h2>
                 <div className="text-base md:text-lg lg:text-xl text-justify mb-4">{product.Artist_Name}</div>
                 <div className="text-base md:text-lg lg:text-xl text-justify mb-4">{product.description}</div>
                 <div className="text-base md:text-lg lg:text-xl text-justify mb-4">{product.Size}</div>
+                {/* Horizontal Divider */}
                 <Horizontal />
+                {/* Product Category */}
                 <div className="text-base md:text-lg lg:text-xl">
                     <span className="font-semibold mb-2">Category: </span>{product.category}
                 </div>
+                {/* Unique Feature */}
                 <div className="text-base md:text-lg lg:text-xl text-justify flex items-center gap-2 md:underline"><IoMdEasel />{product.unique}</div>
+                {/* Shipping Information */}
                 <div className="text-base md:text-lg lg:text-xl text-justify flex items-center gap-2 md:underline"><LiaShippingFastSolid />{product.Shipping}</div>
+                {/* Horizontal Divider */}
                 <Horizontal />
+                 {/* Add to Cart or View Cart button based on whether the product is already in the cart */}
                 {isProductInCart ? (
                     <>
                         <p className="text-base md:text-lg lg:text-xl mb-2 text-slate-500 flex items-center gap-1">

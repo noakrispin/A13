@@ -1,6 +1,11 @@
+import React from 'react';
+
+// Define the HomeBanner component
 const HomeBanner = () => {
   return (
+    // Container for the banner, with padding and relative positioning
     <div className="pt-10 xl:px-20 px-4 relative z-0"> 
+    {/* Flex container for text content and ellipse */}
       <div className="mx-auto px-2 py-0 flex flex-col md:flex-row gap-2 justify-left items-start relative">
         {/* Text Content */}
         <div className="md:w-1/2 text-violet-400 z-10 relative">
