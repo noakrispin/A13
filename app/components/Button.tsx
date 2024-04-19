@@ -2,6 +2,7 @@
 
 import { IconType } from "react-icons";
 
+// Define the props interface for the Button component
 interface ButtonProps{
     label: string;
     disabled?: boolean;
@@ -13,6 +14,7 @@ interface ButtonProps{
     => void;
 }
 
+// Button component definition
 const Button: React.FC <ButtonProps> = ({
     label,
     disabled,
@@ -22,6 +24,7 @@ const Button: React.FC <ButtonProps> = ({
     icon: Icon,
     onClick,
 }) => {
+  // Render a button element with dynamic classNames and onClick event handler
   return (
     <button 
     onClick={onClick}
@@ -48,7 +51,7 @@ const Button: React.FC <ButtonProps> = ({
     `}>
       {/*chack if icon exsit */}
       {Icon && <Icon size={24}/>}
-      {label}
+      {label} {/* Render the button label */}
 
     </button>
   )

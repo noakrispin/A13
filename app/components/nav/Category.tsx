@@ -18,7 +18,9 @@ const Category: React.FC<CategoryProps> = ({ label, Icon = FiCheckCircle, select
   const [isDarkMode, setIsDarkMode] = useState(false); // State to keep track of dark mode
 
 
+  // Function to handle click event on category
   const handleClick = useCallback(() => {
+     // Redirect to homepage if 'All' category is selected, otherwise update category in URL query
     if (label === 'All') {
       router.push('/');
     } else {
@@ -53,8 +55,8 @@ const Category: React.FC<CategoryProps> = ({ label, Icon = FiCheckCircle, select
         selected ? 'border-b-slate-300 text-slate-300' : 'border-transparent'
       } ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
     >
-      <Icon size={20} />
-      <div className="font-medium text-sm">{label}</div>
+      <Icon size={20} /> {/* Render the icon component */}
+      <div className="font-medium text-sm">{label}</div> {/* Render the category label */}
     </div>
   );
 };

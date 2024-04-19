@@ -18,6 +18,7 @@ interface OrdersClientProps {
     orders: ExtendedOrder[];
 }
 
+// Define ExtendedOrder type to include both Order and User data
 type ExtendedOrder = Order & {
     user: User;
 };
@@ -25,7 +26,8 @@ type ExtendedOrder = Order & {
 const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
     const router = useRouter();
 
-    
+
+    // Determine if dark mode is enabled based on the user's preference
     let isDarkModeEnabled = false;
     let darkMode = false;
 
@@ -35,8 +37,10 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
     }
 
 
+    // Initialize rows array to store order data for the DataGrid component
     let rows: any = [];
 
+    // Populate rows array with order data
     if (orders) {
         rows = orders.map((order) => ({
             id: order.id,
@@ -48,15 +52,18 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
         }));
     }
 
+    // Define columns for the DataGrid
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", width: 220},
         { field: "customer", headerName: "Customer Name", width: 130},
+        // Define column for amount with custom rendering
         {
             field: "amount",
             headerName: "Amount (USD)",
             width: 130,
             renderCell: (params) => <div className="font-bold text-slate-800">{params.row.amount}</div>,
         },
+         // Define column for payment status with custom rendering
         {
             field: "paymentStatus",
             headerName: "Payment Status",
@@ -64,6 +71,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
             renderCell: (params) => {
                 return(
                     <div>
+                        {/* Render payment status based on order status */}
                         {params.row.paymentStatus === "pending" ? (
                             <Status
                                 text="pending"
@@ -83,6 +91,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
                 );
             },
         },
+        // Define column for delivery status with custom rendering
         {
             field: "deliveryStatus",
             headerName: "Delivery Status",
@@ -90,6 +99,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
             renderCell: (params) => {
                 return(
                     <div>
+                        {/* Render delivery status based on order delivery status */}
                         {params.row.deliveryStatus === "pending" ? (
                             <Status
                                 text="pending"
@@ -121,6 +131,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
             headerName: "Date",
             width: 130,
         },
+        // Define column for actions with custom rendering
         {
             field: "action",
             headerName: "Actions",
@@ -137,7 +148,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ orders }) => {
         },
     ];
 
-
+    // Custom checkbox component for the DataGrid
     const CustomWhiteCheckbox = (props: JSX.IntrinsicAttributes & CheckboxProps) => (
         <Checkbox
             {...props}

@@ -1,5 +1,6 @@
 import { IconType } from "react-icons";
 
+// Define the props interface for the Status component
 interface StatusProps {
   text: string;
   icon: IconType;
@@ -7,8 +8,10 @@ interface StatusProps {
   color: string;
 }
 
+// Define the Status component
 const Status: React.FC<StatusProps> = ({ text, icon: Icon, bg, color }) => {
   return (
+    // Render the status div with dynamic styles based on props
     <div
       className={`
     ${bg}
@@ -20,9 +23,10 @@ const Status: React.FC<StatusProps> = ({ text, icon: Icon, bg, color }) => {
     gap-1
     `}
     >
-      {text} <Icon size={15} />
+      {/* Render the status text and icon */}
+      {text} <Icon size={15} /> {/* Icon with size 15 */}
     </div>
   );
 };
-
+// Export the Status component
 export default Status;

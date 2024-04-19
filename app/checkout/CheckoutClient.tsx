@@ -1,5 +1,6 @@
 'use client';
 
+// Importing necessary modules and components
 import { useCart } from "@/hooks/useCart";
 import { Elements } from "@stripe/react-stripe-js";
 import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js";
@@ -16,25 +17,27 @@ import Container from "../components/Container";
 // This is your test publishable API key.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHBLE_KEY as string);
 
-
+// Define the CheckoutClient functional component
 const CheckoutClient = () => {
-
+    // Destructuring variables and functions from useCart hook
     const {cartProducts, paymentIntent,handleSetPaymentIntent} = useCart();
-    const [loading, setLoading] = useState(false);
-    const[error, setError]= useState(false);
-    const router=useRouter();
+    const [loading, setLoading] = useState(false); // State to track loading state
+    const[error, setError]= useState(false); // State to track error state
+    const router=useRouter(); // Router instance
     
-    const[clientSecret, setClientSecret] = useState("");
-    const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const[clientSecret, setClientSecret] = useState(""); // State for client secret
+    const [paymentSuccess, setPaymentSuccess] = useState(false); // State to track payment success
 
     console.log("paymentintnt",paymentIntent);
     console.log("clientSecret",clientSecret);
 
+    // Effect to fetch payment intent when cart products or payment intent changes
     useEffect(() => {
         if (cartProducts) {
             setLoading(true);
             setError(false);
     
+            // Fetch payment intent from server
             fetch("/api/create-payment-intent", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -64,6 +67,7 @@ const CheckoutClient = () => {
         }
     }, [cartProducts, paymentIntent, handleSetPaymentIntent, router]); //
 
+    // Options for Stripe Elements
     const options: StripeElementsOptions = {
         clientSecret,
         appearance:{
@@ -72,12 +76,14 @@ const CheckoutClient = () => {
         },
     };
 
-
+    // Function to handle setting payment success
     const handleSetPaymentSuccess = useCallback((value: boolean)=>{
         setPaymentSuccess(value);
     },[]);
 
+    // Render the CheckoutClient component
     return (<div className="W-full ">
+        {/* Render CheckoutForm within Elements component */}
             {paymentIntent && clientSecret && cartProducts && (
                 <Elements options={options} stripe={stripePromise}>
                     <Container>
@@ -86,9 +92,12 @@ const CheckoutClient = () => {
                 </Elements>
             )}
 
+            {/* Loading indicator */}
             {loading && <div className="text-center ">Loading Checkout...</div>}
+            {/* Error message */}
             {error && <div className="text-center text-rose-600">Something went wrong</div>}
 
+            {/* Payment success message */}
             {paymentSuccess && 
             <div className="flex items-center flex-col gap-4">
                 <div className=" text-teal-500 text-center">Payment Success</div>

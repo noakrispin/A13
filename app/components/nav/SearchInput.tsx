@@ -6,10 +6,13 @@ import { CiSearch } from 'react-icons/ci';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import queryString from 'query-string';
 
+// SearchInput component definition
 const SearchInput = () => {
 
+  // Initialize the useRouter hook
   const router=useRouter();
 
+  // Initialize the useForm hook to handle form state and submission
   const {
     register,
     handleSubmit,
@@ -21,7 +24,7 @@ const SearchInput = () => {
     }
   });
   
-
+  // Define the onSubmit handler function
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!data.searchTerm) {
       return router.push('/');
@@ -50,7 +53,9 @@ const SearchInput = () => {
          bg-transparent bg-clip-padding px-2 py-1
          focus:bourder-[0.5px] focus:border-white"
         />
-        <button onClick={handleSubmit(onSubmit)} className="absolute right-1 top-0 h-full flex items-center"><CiSearch className="h-5 w-5" /></button>
+        <button onClick={handleSubmit(onSubmit)} className="absolute right-1 top-0 h-full flex items-center">
+          {/* Render the search icon */}
+          <CiSearch className="h-5 w-5" /></button>
       </div>
     </div>
   );

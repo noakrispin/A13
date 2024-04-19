@@ -1,9 +1,12 @@
 
+// Define the props interface for the FooterList component
 interface FooterListProps{
-    title: string;
-    children: React.ReactNode;
+    title: string; // Title for the footer list
+    children: React.ReactNode; // Children elements to be rendered inside the footer list
 
 }
+
+// FooterList component definition
 const FooterList: React.FC<FooterListProps>= ({children}) => {
   return (
     <div className="
@@ -16,7 +19,7 @@ const FooterList: React.FC<FooterListProps>= ({children}) => {
     flex-col
     gap-2
     ">
-        {children}
+        {children}  {/* Render children elements */}
     </div>
   );
 }
