@@ -6,7 +6,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { formatPrices } from "@/Utils/formatPrices";
 import Heading from "@/app/components/Heading";
 import Status from "@/app/components/Status";
-import {MdCached,MdClose,MdDelete,MdDone,MdRemoveRedEye} from "react-icons/md";
+import { MdCached, MdClose, MdDelete, MdDone, MdRemoveRedEye } from "react-icons/md";
 import ActionBtn from "@/app/components/ActionBtn";
 import { JSX, useCallback, useEffect } from "react";
 import axios from "axios";
@@ -16,28 +16,18 @@ import { deleteObject, getStorage, ref } from "firebase/storage";
 import firebaseApp from "@/libs/firebase";
 import Checkbox, { CheckboxProps } from "@mui/material/Checkbox";
 
-
-
 // Define interface for props
 interface ManageProductsClientProps {
   products: Product[]; // Array of products
 }
 
 // Functional component for managing products
-const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) => {
+const ManageProductsClient: React.FC<ManageProductsClientProps> = ({ products }) => {
   const router = useRouter(); // Initialize useRouter hook
   const storage = getStorage(firebaseApp); // Initialize Firebase storage
   let rows: any = []; // Initialize rows variable for DataGrid
 
-  let isDarkModeEnabled = false;
-  let darkMode = false;
-
-  if (typeof window !== 'undefined') {
-      isDarkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      darkMode = isDarkModeEnabled ;
-  }
-
-   // Populate rows with product data
+  // Populate rows with product data
   if (products) {
     rows = products.map((product) => {
       return {
@@ -47,28 +37,26 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
         category: product.category,
         artistName: product.Artist_Name,
         inStock: product.inStock,
-        image: product.images,
+        image: product.Image,
       };
     });
   }
 
   // Define columns for DataGrid
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 220 },
-    { field: "name", headerName: "Name", width: 220 },
+    { field: "id", headerName: "ID", width: 220, cellClassName: "text-white" },
+    { field: "name", headerName: "Name", width: 220, cellClassName: "text-white" },
     {
       field: "price",
       headerName: "Price(USD)",
       width: 100,
       renderCell: (params) => {
-        return (
-          <div className="font-bold text-violet-500'">{params.row.price}</div>
-        );
+        return <div className="font-bold text-violet-500">{params.row.price}</div>;
       },
-
+      cellClassName: "text-white",
     },
-    { field: "category", headerName: "Category", width: 100 },
-    { field: "artistName", headerName: "Artist Name", width: 100},
+    { field: "category", headerName: "Category", width: 100, cellClassName: "text-white" },
+    { field: "artistName", headerName: "Artist Name", width: 100, cellClassName: "text-white" },
     {
       field: "inStock",
       headerName: "inStock",
@@ -77,28 +65,20 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
         return (
           <div>
             {params.row.inStock === true ? (
-              <Status
-                text="in stock"
-                icon={MdDone}
-                bg="bg-teal-200"
-                color="text-black"
-              />
+              <Status text="in stock" icon={MdDone} bg="bg-teal-200" color="text-black" />
             ) : (
-              <Status
-                text="out of stock"
-                icon={MdClose}
-                bg="bg-rose-200"
-                color="text-black"
-              />
+              <Status text="out of stock" icon={MdClose} bg="bg-rose-200" color="text-black" />
             )}
           </div>
         );
       },
+      cellClassName: "text-white",
     },
     {
       field: "action",
       headerName: "Actions",
       width: 200,
+      cellClassName: "text-white",
       renderCell: (params) => {
         return (
           <div className="flex justify-between gap-4 w-full">
@@ -117,7 +97,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
             <ActionBtn
               icon={MdRemoveRedEye}
               onClick={() => {
-                router.push(`/product/${params.row.id}`); ///
+                router.push(`product/${params.row.id}`);
               }}
             />
           </div>
@@ -126,10 +106,10 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
     },
   ];
 
-   // Function to handle toggling product stock status
+  // Function to handle toggling product stock status
   const handleToggleStock = useCallback((id: string, inStock: boolean) => {
     axios
-      .put(`/api/product/${id}`, { ////
+      .put("/api/product", {
         id,
         inStock: !inStock,
       })
@@ -141,7 +121,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
         toast.error("Oops! Something went wrong");
         console.log(err);
       });
-  }, [router]); // Include router in the dependency array
+  }, []);
 
   // Function to handle deleting a product
   const handleDelete = useCallback(async (id: string, images: any[]) => {
@@ -175,7 +155,7 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
         toast.error("Failed to delete product");
         console.log(err);
       });
-  }, [router,storage]); // Include router and storage in the dependency array
+  }, []);
 
   useEffect(() => {
     const style = document.createElement("style");
@@ -193,59 +173,61 @@ const ManageProductsClient: React.FC<ManageProductsClientProps> = ({products,}) 
 
   const CustomWhiteCheckbox = (props: JSX.IntrinsicAttributes & CheckboxProps) => (
     <Checkbox
-        {...props}
-        sx={{
-            color: 'white', // Checkbox color when not checked
-            '&.Mui-checked': {
-                color: 'white', // Checkbox color when checked
-            },
-        }}
+      {...props}
+      sx={{
+        color: "white", // Checkbox color when not checked
+        "&.Mui-checked": {
+          color: "white", // Checkbox color when checked
+        },
+      }}
     />
-);
+  );
 
   // Render the component
   return (
-    <div className="max-w-[1150px] m-auto text-xl">
-      <div className="mb-4 mt-8">
+    <div className="max-w-[1150px] m-auto text-xl bg-black p-4">
+      <div className="mb-4 mt-8 text-white">
         <Heading title="Manage Products" center />
       </div>
-      <div style={{ height: 600, width: "100%", backgroundColor: darkMode ? '#222' : '#a488bf' }}>
-      <DataGrid
-    rows={rows}
-    columns={columns}
-    style={{ color: 'white' }}
-    initialState={{
-        pagination: {
-            paginationModel: { page: 0, pageSize: 9 },
-        },
-    }}
-    pageSizeOptions={[9, 20]}
-    checkboxSelection
-    disableRowSelectionOnClick
-    components={{
-      BaseCheckbox: CustomWhiteCheckbox,
-  }}
-                    sx={{
-                        '& .MuiDataGrid-row': {
-                            color:  'black', // Set row text color based on mode
-                        },
-                        '& .MuiDataGrid-columnHeader': {
-                            color: darkMode ? 'white' : 'black', // Set header text color based on mode
-                            backgroundColor: darkMode ? '#222' : '#a488bf', // Adjust header background color
-                        },
-                        '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
-                            color:  'black',
-                        },
-                        '& .Mui-selected': {
-                            color:'black',
-                        },
-                        '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
-                            color:'black',
-                        },
-                    }}
-
-                  />
-
+      <div style={{ height: 600, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          style={{ color: "white" }}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 9 },
+            },
+          }}
+          pageSizeOptions={[9, 20]}
+          checkboxSelection
+          disableRowSelectionOnClick
+          components={{
+            BaseCheckbox: CustomWhiteCheckbox,
+          }}
+          sx={{
+            // Apply white color to all row text
+            "& .MuiDataGrid-row": {
+              color: "white",
+            },
+            // Apply white color to column headers
+            "& .MuiDataGrid-columnHeader": {
+              color: "white",
+            },
+            // Apply white color to the footer container and pagination toolbar
+            "& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar": {
+              color: "white",
+            },
+            // Apply white color to the selected row count footer text
+            "& .Mui-selected": {
+              color: "white",
+            },
+            // Apply white color to pagination controls and rows per page text
+            "& .MuiTablePagination-select, & .MuiTablePagination-selectLabel": {
+              color: "white",
+            },
+          }}
+        />
       </div>
     </div>
   );

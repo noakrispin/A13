@@ -1,6 +1,5 @@
 "use client";
 
-// Importing necessary modules and components
 import { Order, User } from "@prisma/client";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { formatPrices } from "@/Utils/formatPrices";
@@ -15,31 +14,18 @@ import { useRouter } from "next/navigation";
 import moment from "moment";
 import Checkbox, { CheckboxProps } from "@mui/material/Checkbox";
 
-// Interface for props of ManageOrdersClient component
 interface ManageOrdersClientProps {
-    orders: ExtendedOrder[]; // Orders array with extended properties
+    orders: ExtendedOrder[];
 }
 
-// ExtendedOrder type extending Order type with additional user property
 type ExtendedOrder = Order & {
-    user: User;// User associated with the order
+    user: User;
 };
 
-// Define the ManageOrdersClient functional component
 const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
-    const router = useRouter(); // Initialize useRouter hook from Next.js
-    let rows: any = []; // Initialize rows variable
+    const router = useRouter();
+    let rows: any = [];
 
-    let isDarkModeEnabled = false; // Initialize isDarkModeEnabled variable
-    let darkMode = false; // Initialize darkMode variable
-
-     // Check if window is available to determine if dark mode is enabled
-    if (typeof window !== 'undefined') {
-        isDarkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        darkMode = isDarkModeEnabled ;// Set darkMode to isDarkModeEnabled
-    } 
-
-    // Map orders to rows array with required properties
     if (orders) {
         rows = orders.map((order) => ({
             id: order.id,
@@ -51,7 +37,6 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
         }));
     }
 
-    // Define columns for DataGrid
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", width: 220 },
         { field: "customer", headerName: "Customer Name", width: 130 },
@@ -144,7 +129,6 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
         },
     ];
 
-     // Function to handle dispatching an order
     const handleDispatch = useCallback((id: any) => {
         axios
             .put("/api/order", {
@@ -153,15 +137,14 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
             })
             .then(() => {
                 toast.success("Order Dispatched");
-                router.refresh(); // Refresh the page after dispatching the order
+                router.refresh();
             })
             .catch((err) => {
-                toast.error("Oops! Something went wrong"); // Display error toast if request fails
-                console.error(err); // Log the error to console
+                toast.error("Oops! Something went wrong");
+                console.error(err);
             });
     }, [router]);
 
-    // Function to handle delivering an order
     const handleDeliver = useCallback((id: any) => {
         axios
             .put("/api/order", {
@@ -169,16 +152,15 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
                 deliveryStatus: "delivered",
             })
             .then(() => {
-                toast.success("Order Delivered"); // Display success toast if delivery is successful
-                router.refresh(); // Refresh the page after delivering the order
+                toast.success("Order Delivered");
+                router.refresh();
             })
             .catch((err) => {
-                toast.error("Oops! Something went wrong"); // Display error toast if request fails
-                console.error(err); // Log the error to console
+                toast.error("Oops! Something went wrong");
+                console.error(err);
             });
     }, [router]);
 
-    // Custom Checkbox component with white color
     const CustomWhiteCheckbox = (props: JSX.IntrinsicAttributes & CheckboxProps) => (
         <Checkbox
             {...props}
@@ -191,16 +173,16 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
         />
     );
 
-    // Render the ManageOrdersClient component
     return (
-        <div className="max-w-[1150px] m-auto text-xl">
-            <div className="mb-4 mt-8 ">
+        <div className="max-w-[1150px] m-auto text-xl text-white bg-black p-4">
+            <div className="mb-4 mt-8 text-white">
                 <Heading title="Manage Orders" center />
             </div>
-            <div style={{ height: 600, width: "100%", backgroundColor: darkMode ? '#222' : '#a488bf' }}>
+            <div style={{ height: 600, width: "100%"}}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
+                    style={{ color: 'white' }} // Make all text in DataGrid white
                     initialState={{
                         pagination: {
                             paginationModel: { page: 0, pageSize: 9 },
@@ -214,20 +196,21 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
                     }}
                     sx={{
                         '& .MuiDataGrid-row': {
-                            color:  'black', // Set row text color based on mode
+                            color: 'white', // Make all row text white
                         },
                         '& .MuiDataGrid-columnHeader': {
-                            color: darkMode ? 'white' : 'black', // Set header text color based on mode
-                            backgroundColor: darkMode ? '#222' : '#a488bf', // Adjust header background color
+                            color: 'white', // Make all column header text white
                         },
                         '& .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar': {
-                            color:  'black',
+                            color: 'white',
                         },
+                        // Apply white color to the selected row count footer text
                         '& .Mui-selected': {
-                            color:'black',
+                            color: 'white',
                         },
+                        // Apply white color to pagination controls and rows per page text
                         '& .MuiTablePagination-select, & .MuiTablePagination-selectLabel': {
-                            color:'black',
+                            color: 'white',
                         },
                     }}
                 />
@@ -235,5 +218,5 @@ const ManageOrdersClient: React.FC<ManageOrdersClientProps> = ({ orders }) => {
         </div>
     );
 };
-// Export the ManageOrdersClient component
+
 export default ManageOrdersClient;
